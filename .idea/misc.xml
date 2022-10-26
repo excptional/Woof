@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/edittext_background.xml" value="0.2215" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/activity_authentication.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/activity_normal_user.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/activity_splash_screen.xml" value="0.33" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/content_normal_user.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/fragment_sign_in.xml" value="0.36102564102564105" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/fragment_sign_up.xml" value="0.36102564102564105" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/fragment_type_of_users.xml" value="0.36102564102564105" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/fragment_user_sign_in.xml" value="0.275" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/nav_header_normal_user.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/spinner_item.xml" value="0.36666666666666664" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
