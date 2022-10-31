@@ -15,9 +15,11 @@ import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
+import com.example.woof.AuthFiles.AuthenticationActivity
 import com.example.woof.R
 import com.example.woof.repo.Response
 import com.example.woof.viewmodel.AppViewModel
@@ -39,7 +41,7 @@ class UserProfileActivity : AppCompatActivity() {
         get() = findViewById(R.id.profileImage)
     private val phoneNo: TextView
         get() = findViewById(R.id.phoneNumberText)
-    private val uploadImage: RelativeLayout
+    private val uploadImage: ImageView
         get() = findViewById(R.id.setImageBtn)
     private val progressBar: LottieAnimationView
         get() = findViewById(R.id.progressbarProfile)
@@ -59,8 +61,8 @@ class UserProfileActivity : AppCompatActivity() {
         get() = findViewById(R.id.regNoLayout)
     private val tradeNoLayout: LinearLayout
         get() = findViewById(R.id.tradeLicenseEditLayout)
-    private val toolbar: Toolbar
-        get() = findViewById(R.id.toolbar)
+    private val signOutBtn: CardView
+        get() = findViewById(R.id.sign_out_btn)
 
     private val cropActivityResultContract = object : ActivityResultContract<Any?, Uri?>() {
         override fun createIntent(context: Context, input: Any?): Intent {
@@ -98,6 +100,9 @@ class UserProfileActivity : AppCompatActivity() {
         cropActivityResultLauncher = registerForActivityResult(cropActivityResultContract) { uri ->
             if (uri != null) {
                 progressBar.visibility = View.VISIBLE
+                uploadImage.isClickable = false
+                userNameLayout.isClickable = false
+                petNameLayout.isClickable = false
                 imageUploadToStorage(uri)
             } else {
                 Toast.makeText(this, "No image is uploaded", Toast.LENGTH_SHORT).show()
@@ -114,7 +119,6 @@ class UserProfileActivity : AppCompatActivity() {
                 getDataFromDatabase(user)
             } else {
                 progressBar.visibility = View.GONE
-                Toast.makeText(this, "User is null", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -126,6 +130,12 @@ class UserProfileActivity : AppCompatActivity() {
             showDialog("Pet Name")
         }
 
+        signOutBtn.setOnClickListener {
+            appViewModel!!.logOut()
+            startActivity(Intent(this, AuthenticationActivity::class.java))
+            finish()
+        }
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -133,7 +143,6 @@ class UserProfileActivity : AppCompatActivity() {
         val dialog = Dialog(this@UserProfileActivity)
         dialog.setCanceledOnTouchOutside(false)
         dialog.setCancelable(false)
-        dialog.onBackPressed()
 
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.dialog_edit_data)
@@ -155,6 +164,9 @@ class UserProfileActivity : AppCompatActivity() {
 
         dialogDoneBtn.setOnClickListener {
             progressBar.visibility = View.VISIBLE
+            uploadImage.isClickable = false
+            userNameLayout.isClickable = false
+            petNameLayout.isClickable = false
             if (dialogEditText.text.toString().isEmpty()) {
                 Toast.makeText(this, "Enter your name", Toast.LENGTH_SHORT).show()
             } else {
@@ -225,7 +237,10 @@ class UserProfileActivity : AppCompatActivity() {
             }
             progressBar.visibility = View.GONE
             profileMainLayout.visibility = View.VISIBLE
-            profileMainLayout.isClickable = true
+            signOutBtn.visibility = View.VISIBLE
+            uploadImage.isClickable = true
+            userNameLayout.isClickable = true
+            petNameLayout.isClickable = true
         }
     }
 }

@@ -74,17 +74,5 @@ class SplashScreen : AppCompatActivity() {
                 }
             }
         }
-//        progressbar.progress = timerValue
-//        object : CountDownTimer(3000, 1000) {
-//            override fun onTick(progress: Long) {
-//                timerValue++
-//                progressbar.progress = timerValue*100/3
-//            }
-//
-//            override fun onFinish() {
-//                progressbar.progress = 3000
-//                startActivity(Intent(this@SplashScreen, MainActivity::class.java))
-//            }
-//        }.start()
     }
 }
