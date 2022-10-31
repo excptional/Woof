@@ -4,6 +4,7 @@
     package="com.example.woof">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,11 +17,21 @@
         android:theme="@style/Theme.Woof"
         tools:targetApi="31">
         <activity
-            android:name=".UserActivities.NormalUserActivity"
+            android:name=".UserActivities.UserProfileActivity"
             android:exported="false"
-            android:label="@string/title_activity_normal_user"
-            android:theme="@style/Theme.Woof.NoActionBar"
-            />
+            android:parentActivityName=".UserActivities.NormalUser.NormalUserActivity" />
+        <activity
+            android:name=".UserActivities.DoctorActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Woof.NoActionBar" />
+        <activity
+            android:name=".UserActivities.SellerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Woof.NoActionBar" />
+        <activity
+            android:name=".UserActivities.NormalUser.NormalUserActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Woof.NoActionBar" />
         <activity
             android:name=".SplashScreen"
             android:exported="true">
@@ -34,8 +45,12 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".AuthenticationActivity"
+            android:name=".AuthFiles.AuthenticationActivity"
             android:exported="true" />
+
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
 </manifest>

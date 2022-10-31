@@ -7,13 +7,13 @@
     android:background="@drawable/splashscreen"
     tools:context=".SplashScreen">
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/progressbarSplashScreen"
+    <ProgressBar
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_10sdp"
-        android:indeterminate="false"
-        app:indicatorColor="@color/lightest_red"
-        app:trackColor="@color/cream" />
-
+        android:layout_height="@dimen/_5sdp"
+        android:layout_alignParentTop="true"
+        android:scaleY="4"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/lightest_red"/>
 
 </RelativeLayout>

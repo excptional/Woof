@@ -5,13 +5,21 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
+import android.os.Handler
 import android.view.View
-import com.google.android.material.progressindicator.LinearProgressIndicator
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import com.example.woof.AuthFiles.AuthenticationActivity
+import com.example.woof.UserActivities.DoctorActivity
+import com.example.woof.UserActivities.NormalUser.NormalUserActivity
+import com.example.woof.UserActivities.SellerActivity
+import com.example.woof.viewmodel.AppViewModel
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
-    var timerValue = 0
+
+    private var appViewModel: AppViewModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
@@ -20,18 +28,63 @@ class SplashScreen : AppCompatActivity() {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
 
-        val progressbar: LinearProgressIndicator = findViewById(R.id.progressbarSplashScreen)
-        progressbar.progress = timerValue
-        object : CountDownTimer(3000, 1000) {
-            override fun onTick(progress: Long) {
-                timerValue++
-                progressbar.progress = timerValue*100/3
-            }
+        appViewModel = ViewModelProvider(this)[AppViewModel::class.java]
 
-            override fun onFinish() {
-                progressbar.progress = 3000
-                startActivity(Intent(this@SplashScreen, MainActivity::class.java))
+        appViewModel!!.userdata.observe(this) { user ->
+            if (user == null) {
+                Handler().postDelayed({
+                    startActivity(Intent(this, AuthenticationActivity::class.java))
+                }, 2000)
+
+            } else {
+                appViewModel!!.getUserType(user)
+                appViewModel!!.usertype.observe(this) { usertype ->
+                    when (usertype) {
+                        "Normal User" -> {
+                            startActivity(
+                                Intent(
+                                    this@SplashScreen,
+                                    NormalUserActivity::class.java
+                                )
+                            )
+                        }
+                        "Seller" -> {
+                            startActivity(
+                                Intent(
+                                    this@SplashScreen,
+                                    SellerActivity::class.java
+                                )
+                            )
+                        }
+                        "Doctor" -> {
+                            startActivity(
+                                Intent(
+                                    this@SplashScreen,
+                                    DoctorActivity::class.java
+                                )
+                            )
+                        }
+                        "Nothing" -> {
+                            Toast.makeText(this@SplashScreen, "starting...", Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toast.makeText(this@SplashScreen, "Something wrong happened", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             }
-        }.start()
+        }
+//        progressbar.progress = timerValue
+//        object : CountDownTimer(3000, 1000) {
+//            override fun onTick(progress: Long) {
+//                timerValue++
+//                progressbar.progress = timerValue*100/3
+//            }
+//
+//            override fun onFinish() {
+//                progressbar.progress = 3000
+//                startActivity(Intent(this@SplashScreen, MainActivity::class.java))
+//            }
+//        }.start()
     }
 }

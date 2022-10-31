@@ -6,23 +6,20 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 
 class AppRepository(private val application: Application) {
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val firebaseDB: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val userLiveData = MutableLiveData<FirebaseUser>()
-    val userData: LiveData<FirebaseUser>
+
+    private val userLiveData = MutableLiveData<FirebaseUser?>()
+    val userData: LiveData<FirebaseUser?>
         get() = userLiveData
     private val responseLiveData = MutableLiveData<Response<String>>()
     val response: LiveData<Response<String>>
         get() = responseLiveData
-    private val responseDBLivedata = MutableLiveData<Response<String>>()
-    val responseDB: LiveData<Response<String>>
-        get() = responseDBLivedata
-    private val usertype = MutableLiveData<Usertype>()
-    val user: LiveData<Usertype>
-    get() = usertype
+    private val usertype = MutableLiveData<String?>()
+    val user: LiveData<String?>
+        get() = usertype
 
     fun login(email: String?, password: String?) {
         firebaseAuth.signInWithEmailAndPassword(email!!, password!!)
@@ -32,7 +29,7 @@ class AppRepository(private val application: Application) {
                     responseLiveData.postValue(Response.Success())
                     userLiveData.postValue(firebaseAuth.currentUser)
                 } else {
-                    responseLiveData.postValue(Response.Failure(task.exception.toString()))
+                    responseLiveData.postValue(Response.Failure(task.exception!!.cause.toString()))
                 }
             }
     }
@@ -40,14 +37,17 @@ class AppRepository(private val application: Application) {
     fun normalUserRegister(
         name: String?,
         petName: String?,
+        phoneNo: String?,
         email: String?,
         password: String?,
     ) {
         val data = hashMapOf(
-            "name" to name,
-            "petName" to petName,
-            "email" to email,
-            "usertype" to "Normal User"
+            "Name" to name,
+            "Pet Name" to petName,
+            "Phone No" to phoneNo,
+            "Image Url" to "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/user2.png?alt=media&token=6eb92a4c-a6e6-443b-9ca3-8e7d5a7cd7ef",
+            "Email" to email,
+            "Usertype" to "Normal User"
         )
         firebaseAuth.createUserWithEmailAndPassword(email!!, password!!)
             .addOnCompleteListener(
@@ -59,14 +59,94 @@ class AppRepository(private val application: Application) {
                         .addOnSuccessListener {
                             responseLiveData.postValue(Response.Success())
                         }.addOnFailureListener {
-                            responseLiveData.postValue(Response.Failure(task.exception.toString()))
+                            responseLiveData.postValue(Response.Failure(task.exception!!.cause.toString()))
                         }
                     firebaseDB.collection("Normal User").document(firebaseAuth.currentUser!!.uid)
                         .set(data)
                         .addOnSuccessListener {
                             responseLiveData.postValue(Response.Success())
                         }.addOnFailureListener {
-                            responseLiveData.postValue(Response.Failure(task.exception.toString()))
+                            responseLiveData.postValue(Response.Failure(task.exception!!.cause.toString()))
+                        }
+                } else {
+                    responseLiveData.postValue(Response.Failure(task.exception!!.cause.toString()))
+                }
+            }
+    }
+
+    fun sellerRegister(
+        name: String?,
+        tradeLicNo: String?,
+        phoneNo: String?,
+        email: String?,
+        password: String?,
+    ) {
+        val data = hashMapOf(
+            "Name" to name,
+            "Trade License Number" to tradeLicNo,
+            "Phone No" to phoneNo,
+            "Image Url" to "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/user2.png?alt=media&token=6eb92a4c-a6e6-443b-9ca3-8e7d5a7cd7ef",
+            "Email" to email,
+            "Usertype" to "Seller"
+        )
+        firebaseAuth.createUserWithEmailAndPassword(email!!, password!!)
+            .addOnCompleteListener(
+            ) { task ->
+                if (task.isSuccessful) {
+                    userLiveData.postValue(firebaseAuth.currentUser)
+                    responseLiveData.postValue(Response.Success())
+                    firebaseDB.collection("User").document(firebaseAuth.currentUser!!.uid).set(data)
+                        .addOnSuccessListener {
+                            responseLiveData.postValue(Response.Success())
+                        }.addOnFailureListener {
+                            responseLiveData.postValue(Response.Failure(it.cause.toString()))
+                        }
+                    firebaseDB.collection("Seller").document(firebaseAuth.currentUser!!.uid)
+                        .set(data)
+                        .addOnSuccessListener {
+                            responseLiveData.postValue(Response.Success())
+                        }.addOnFailureListener {
+                            responseLiveData.postValue(Response.Failure(it.cause.toString()))
+                        }
+                } else {
+                    responseLiveData.postValue(Response.Failure(task.exception.toString()))
+                }
+            }
+    }
+
+    fun doctorRegister(
+        name: String?,
+        regNo: String?,
+        phoneNo: String?,
+        email: String?,
+        password: String?,
+    ) {
+        val data = hashMapOf(
+            "Name" to name,
+            "Registration No" to regNo,
+            "Phone No" to phoneNo,
+            "Image Url" to "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/user2.png?alt=media&token=6eb92a4c-a6e6-443b-9ca3-8e7d5a7cd7ef",
+            "Email" to email,
+            "Usertype" to "Doctor"
+        )
+        firebaseAuth.createUserWithEmailAndPassword(email!!, password!!)
+            .addOnCompleteListener(
+            ) { task ->
+                if (task.isSuccessful) {
+                    userLiveData.postValue(firebaseAuth.currentUser)
+                    responseLiveData.postValue(Response.Success())
+                    firebaseDB.collection("User").document(firebaseAuth.currentUser!!.uid).set(data)
+                        .addOnSuccessListener {
+                            responseLiveData.postValue(Response.Success())
+                        }.addOnFailureListener {
+                            responseLiveData.postValue(Response.Failure(it.cause.toString()))
+                        }
+                    firebaseDB.collection("Doctor").document(firebaseAuth.currentUser!!.uid)
+                        .set(data)
+                        .addOnSuccessListener {
+                            responseLiveData.postValue(Response.Success())
+                        }.addOnFailureListener {
+                            responseLiveData.postValue(Response.Failure(it.cause.toString()))
                         }
                 } else {
                     responseLiveData.postValue(Response.Failure(task.exception.toString()))
@@ -79,17 +159,16 @@ class AppRepository(private val application: Application) {
         userLiveData.postValue(null)
     }
 
-
     fun userType(user: FirebaseUser) {
         firebaseDB.collection("User").document(user.uid).get()
             .addOnSuccessListener {
-                if(it.exists()){
-                    val userType = it.getString("usertype")
-                    usertype.postValue(Usertype.Success(userType))
-                }else usertype.postValue(Usertype.Failure("Data does not exist"))
+                if (it.exists()) {
+                    val userType = it.getString("Usertype")
+                    usertype.postValue(userType)
+                } else usertype.postValue("Data does not exist")
             }
             .addOnFailureListener {
-                usertype.postValue(Usertype.Failure(it.toString()))
+                usertype.postValue(it.toString())
             }
     }
 

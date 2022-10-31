@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.woof.UserActivities.NormalUser.Home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_food_and_accessories"
+        android:name="com.example.woof.UserActivities.NormalUser.Accessories"
+        tools:layout="@layout/fragment_accessories" />
+
+    <fragment
+        android:id="@+id/nav_training_and_grooming"
+        android:name="com.example.woof.UserActivities.NormalUser.TrainingAndGrooming"
+        tools:layout="@layout/fragment_training_and_grooming" />
+
+    <fragment
+        android:id="@+id/nav_pet_shop_and_kennel"
+        android:name="com.example.woof.UserActivities.NormalUser.Shop"
+        tools:layout="@layout/fragment_training_and_grooming" />
+
+    <fragment
+        android:id="@+id/nav_hospitals_and_clinics"
+        android:name="com.example.woof.UserActivities.NormalUser.Hospitalities"
+        tools:layout="@layout/fragment_hospitalities" />
+
+    <fragment
+        android:id="@+id/nav_medicines"
+        android:name="com.example.woof.UserActivities.NormalUser.Medicine"
+        tools:layout="@layout/fragment_medicine" />
+
+    <fragment
+        android:id="@+id/nav_about_us"
+        android:name="com.example.woof.UserActivities.NormalUser.AboutUs"
+        tools:layout="@layout/fragment_about_us" />
+
+    <fragment
+        android:id="@+id/nav_contact_us"
+        android:name="com.example.woof.UserActivities.NormalUser.ContactUs"
+        tools:layout="@layout/fragment_contact_us" />
+</navigation>

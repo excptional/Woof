@@ -6,15 +6,36 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/home"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/nav_food_and_accessories"
+            android:icon="@drawable/food_and_accessories"
+            android:title="Food And Accessories" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_training_and_grooming"
+            android:icon="@drawable/grooming"
+            android:title="Training And Grooming" />
+        <item
+            android:id="@+id/nav_pet_shop_and_kennel"
+            android:icon="@drawable/pet_shop"
+            android:title="Pet Shops And Kennels" />
+        <item
+            android:id="@+id/nav_hospitals_and_clinics"
+            android:icon="@drawable/building2"
+            android:title="Hospitals And Clinics" />
+        <item
+            android:id="@+id/nav_medicines"
+            android:icon="@drawable/medicine"
+            android:title="Medicines" />
+        <item
+            android:id="@+id/nav_about_us"
+            android:icon="@drawable/about"
+            android:title="About Us" />
+        <item
+            android:id="@+id/nav_contact_us"
+            android:icon="@drawable/support"
+            android:title="Contact Us" />
     </group>
+
 </menu>

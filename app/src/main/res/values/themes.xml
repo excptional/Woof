@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Woof" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/lightest_red</item>
+        <item name="colorPrimary">@color/light_fade_orange</item>
         <item name="colorPrimaryVariant">@color/fade_cream</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -25,7 +25,4 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Woof.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.Woof.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
