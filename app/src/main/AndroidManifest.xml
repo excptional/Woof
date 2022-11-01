@@ -42,9 +42,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="true" />
-        <activity
             android:name=".AuthFiles.AuthenticationActivity"
             android:exported="true" />
 
