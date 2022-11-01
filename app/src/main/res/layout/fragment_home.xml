@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UserActivities.NormalUser.Home">
 
     <LinearLayout
@@ -14,33 +14,34 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="start"
             android:layout_margin="@dimen/_10sdp"
             android:text="Home"
-            android:layout_gravity="start"
-            android:textColor="@color/material_black"
-            />
+            android:textColor="@color/material_black" />
 
-                <androidx.cardview.widget.CardView
-                    app:cardCornerRadius="@dimen/_10sdp"
-                    android:layout_margin="16dp"
-                    app:cardBackgroundColor="@color/material_black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            app:cardBackgroundColor="@color/material_black"
+            app:cardCornerRadius="@dimen/_10sdp">
 
-                    <com.denzcoskun.imageslider.ImageSlider
-                        android:id="@+id/image_slider"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_160sdp"
-                        app:iss_auto_cycle="true"
-                        app:iss_period="1000"
-                        app:iss_delay="0"
-                        app:iss_placeholder="@drawable/placeholder"
-                        app:iss_error_image="@drawable/error"
-                        app:iss_selected_dot="@drawable/default_selected_dot"
-                        app:iss_unselected_dot="@drawable/default_unselected_dot"
-                        android:background="@drawable/uploadimage" />
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/image_slider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_160sdp"
+                android:background="@drawable/uploadimage"
+                app:iss_auto_cycle="true"
+                app:iss_delay="0"
+                app:iss_error_image="@drawable/error"
+                app:iss_period="1000"
+                app:iss_placeholder="@drawable/placeholder"
+                app:iss_selected_dot="@drawable/default_selected_dot"
+                app:iss_unselected_dot="@drawable/default_unselected_dot" />
 
-                </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
