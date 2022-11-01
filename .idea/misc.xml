@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/BIKASH/Woof-master/Woof-master/app/src/main/res/layout/activity_normal_user.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/camer_profile_icon.xml" value="0.3655" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/camera_inner_file.xml" value="0.3655" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/edittext_background.xml" value="0.2215" />
@@ -47,6 +48,9 @@
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/menu/main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/menu/normal_user.xml" value="0.36666666666666664" />
+        <entry key="..\:/Woof-master/Woof-master/app/src/main/res/layout/activity_normal_user.xml" value="0.36666666666666664" />
+        <entry key="..\:/Woof-master/Woof-master/app/src/main/res/layout/activity_user_profile.xml" value="0.36666666666666664" />
+        <entry key="..\:/Woof-master/Woof-master/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
