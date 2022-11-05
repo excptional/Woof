@@ -63,6 +63,7 @@ class NormalUserActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home,
+                R.id.nav_feed,
                 R.id.nav_food_and_accessories,
                 R.id.nav_training_and_grooming,
                 R.id.nav_pet_shop_and_kennel,
@@ -77,7 +78,7 @@ class NormalUserActivity : AppCompatActivity() {
 
         appViewModel!!.userdata.observe(this) { user ->
             if (user != null) {
-                getImageFromDatabase(user)
+                getDataFromDatabase(user)
             }
         }
 
@@ -87,7 +88,7 @@ class NormalUserActivity : AppCompatActivity() {
 
     }
 
-    private fun getImageFromDatabase(user: FirebaseUser){
+    private fun getDataFromDatabase(user: FirebaseUser){
         dbViewModel!!.getProfileData(user)
         dbViewModel!!.profileData.observe(this) { dataList ->
             name.text = dataList[1]

@@ -4,6 +4,7 @@ import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.woof.repo.DBRepository
 import com.example.woof.repo.Response
 import com.google.firebase.auth.FirebaseUser
@@ -15,6 +16,8 @@ class DBViewModel(application: Application) :
         get() = dbRepository.userProfileData
     val dbLiveData: LiveData<Response<String>>
         get() = dbRepository.responseDB
+    val postData: LiveData<ArrayList<MutableList<String?>>>
+        get() = dbRepository.postData
 
     fun uploadImageToStorage(imageUri: Uri, user: FirebaseUser){
         dbRepository.uploadImageToStorage(imageUri, user)
@@ -26,5 +29,24 @@ class DBViewModel(application: Application) :
 
     fun changeProfileData(user: FirebaseUser, field: String, newData: String){
         dbRepository.changeProfileData(user, field, newData)
+    }
+
+    fun uploadPostWithImage(
+        user: FirebaseUser,
+        userName: String,
+        userImageUrl: String,
+        description: String,
+        imageUri: Uri?
+    ) {
+        dbRepository.uploadPostWithImage(user, userName, userImageUrl, description, imageUri!!)
+    }
+
+    fun uploadPostWithOutImage(
+        user: FirebaseUser,
+        userName: String,
+        userImageUrl: String,
+        description: String,
+    ) {
+        dbRepository.uploadPostWithOutImage(user, userName, userImageUrl, description)
     }
 }

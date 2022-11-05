@@ -4,16 +4,29 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/BIKASH/Woof-master/Woof-master/app/src/main/res/layout/activity_normal_user.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/add_black.xml" value="0.2595" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/add_gray.xml" value="0.2595" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/camer_profile_icon.xml" value="0.3655" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/camera_inner_file.xml" value="0.3655" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/clear.xml" value="0.2595" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/edittext_background.xml" value="0.2215" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/food_gray.xml" value="0.2595" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/globe_gray.xml" value="0.2595" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/grooming_gray.xml" value="0.2595" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/hospital_gray.xml" value="0.2595" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/love.xml" value="0.2595" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/love_border.xml" value="0.2595" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/medicine_gray.xml" value="0.2595" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/pen_icon.xml" value="0.3655" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/pet.xml" value="0.3655" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/pet_gray.xml" value="0.2595" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/pet_profile_icon.xml" value="0.3655" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/plus.xml" value="0.2595" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/profile.xml" value="0.302" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/registration.xml" value="0.302" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/round_corner_input_dialog.xml" value="0.302" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/round_corner_red.xml" value="0.3655" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/send_icon.xml" value="0.2595" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/side_nav_bar.xml" value="0.2565" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/drawable/support.xml" value="0.302" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout-v23/nav_header_main.xml" value="0.365625" />
@@ -29,9 +42,11 @@
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/content_normal_user.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/dialog_edit_data.xml" value="0.365625" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/dialog_post.xml" value="0.365625" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/fragment_about_us.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/fragment_accessories.xml" value="0.35208333333333336" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/fragment_contact_us.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/fragment_feed.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/fragment_hospitalities.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/fragment_medicine.xml" value="0.36666666666666664" />
@@ -44,6 +59,7 @@
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/fragment_user_sign_in.xml" value="0.275" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/nav_header_main.xml" value="0.33" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/nav_header_normal_user.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/post_item.xml" value="0.33" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/layout/spinner_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
         <entry key="..\:/Users/BIKASH/Woof/app/src/main/res/menu/main.xml" value="0.36666666666666664" />

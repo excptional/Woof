@@ -68,7 +68,6 @@ class UserProfileActivity : AppCompatActivity() {
         override fun createIntent(context: Context, input: Any?): Intent {
             return CropImage.activity()
                 .setAspectRatio(4, 4)
-//                .setMaxCropResultSize(512,512)
                 .setCropShape(CropImageView.CropShape.OVAL)
                 .setOutputCompressQuality(30)
                 .getIntent(this@UserProfileActivity)

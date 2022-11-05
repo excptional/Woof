@@ -59,4 +59,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+    implementation"androidx.recyclerview:recyclerview:1.2.1"
+    implementation 'org.ocpsoft.prettytime:prettytime:5.0.4.Final'
 }

@@ -7,41 +7,46 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.woof.UserActivities.NormalUser.Home"
+        android:name="com.example.woof.UserActivities.NormalUser.fragments.Home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/nav_feed"
+        android:name="com.example.woof.UserActivities.NormalUser.fragments.Feed"
+        tools:layout="@layout/fragment_feed" />
+
+    <fragment
         android:id="@+id/nav_food_and_accessories"
-        android:name="com.example.woof.UserActivities.NormalUser.Accessories"
+        android:name="com.example.woof.UserActivities.NormalUser.fragments.Accessories"
         tools:layout="@layout/fragment_accessories" />
 
     <fragment
         android:id="@+id/nav_training_and_grooming"
-        android:name="com.example.woof.UserActivities.NormalUser.TrainingAndGrooming"
+        android:name="com.example.woof.UserActivities.NormalUser.fragments.TrainingAndGrooming"
         tools:layout="@layout/fragment_training_and_grooming" />
 
     <fragment
         android:id="@+id/nav_pet_shop_and_kennel"
-        android:name="com.example.woof.UserActivities.NormalUser.Shop"
+        android:name="com.example.woof.UserActivities.NormalUser.fragments.Shop"
         tools:layout="@layout/fragment_training_and_grooming" />
 
     <fragment
         android:id="@+id/nav_hospitals_and_clinics"
-        android:name="com.example.woof.UserActivities.NormalUser.Hospitalities"
+        android:name="com.example.woof.UserActivities.NormalUser.fragments.Hospitalities"
         tools:layout="@layout/fragment_hospitalities" />
 
     <fragment
         android:id="@+id/nav_medicines"
-        android:name="com.example.woof.UserActivities.NormalUser.Medicine"
+        android:name="com.example.woof.UserActivities.NormalUser.fragments.Medicine"
         tools:layout="@layout/fragment_medicine" />
 
     <fragment
         android:id="@+id/nav_about_us"
-        android:name="com.example.woof.UserActivities.NormalUser.AboutUs"
+        android:name="com.example.woof.UserActivities.NormalUser.fragments.AboutUs"
         tools:layout="@layout/fragment_about_us" />
 
     <fragment
         android:id="@+id/nav_contact_us"
-        android:name="com.example.woof.UserActivities.NormalUser.ContactUs"
+        android:name="com.example.woof.UserActivities.NormalUser.fragments.ContactUs"
         tools:layout="@layout/fragment_contact_us" />
 </navigation>

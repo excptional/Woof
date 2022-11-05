@@ -1,5 +1,6 @@
 package com.example.woof.repo
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.LiveData
@@ -7,6 +8,8 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class DBRepository(private val application: Application) {
@@ -21,6 +24,10 @@ class DBRepository(private val application: Application) {
     private val userProfileLivedata = MutableLiveData<MutableList<String?>>()
     val userProfileData: LiveData<MutableList<String?>>
         get() = userProfileLivedata
+
+    private val postLivedata = MutableLiveData<ArrayList<MutableList<String?>>>()
+    val postData: LiveData<ArrayList<MutableList<String?>>>
+        get() = postLivedata
 
     fun uploadImageToStorage(imageUri: Uri, user: FirebaseUser) {
         val ref = firebaseStorage.reference.child("images/${user.uid}/${imageUri.lastPathSegment}")
@@ -107,6 +114,106 @@ class DBRepository(private val application: Application) {
                 responseDBLivedata.postValue(Response.Failure("Document not exist"))
             }
         }
+            .addOnFailureListener {
+                responseDBLivedata.postValue(Response.Failure(it.toString()))
+            }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun uploadPostWithImage(
+        user: FirebaseUser,
+        userName: String,
+        userImageUrl: String,
+        description: String?,
+        imageUri: Uri?
+    ) {
+        val dateAndTime = SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa", Locale.getDefault()).format(Date())
+        val date = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
+        var url = ""
+        val ref = firebaseStorage.reference.child("post/${user.uid}/${imageUri!!.lastPathSegment}")
+        ref.putFile(imageUri)
+            .addOnSuccessListener {
+                ref.downloadUrl
+                    .addOnSuccessListener {
+                        responseDBLivedata.postValue(Response.Success())
+                        url = it.toString()
+                    }
+                    .addOnFailureListener {
+                        responseDBLivedata.postValue(Response.Failure(it.toString()))
+                    }
+            }
+            .addOnFailureListener {
+                responseDBLivedata.postValue(Response.Failure(it.toString()))
+            }
+
+        val postData = hashMapOf(
+            "Post ID" to "post.$date",
+            "Profile Name" to userName,
+            "Profile Image Url" to userImageUrl,
+            "Description" to description,
+            "Content Url" to url,
+            "No Of Likes" to "0",
+            "List Of Reactors" to "",
+            "Upload Date" to dateAndTime
+        )
+        firebaseDB.collection("Post").document("post_$date").set(postData)
+            .addOnSuccessListener {
+                responseDBLivedata.postValue(Response.Success())
+                fetchPost(user)
+            }
+            .addOnFailureListener {
+                responseDBLivedata.postValue(Response.Failure(it.toString()))
+            }
+    }
+
+    fun uploadPostWithOutImage(
+        user: FirebaseUser,
+        userName: String,
+        userImageUrl: String,
+        description: String?,
+    ) {
+        val dateAndTime = SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa", Locale.getDefault()).format(Date())
+        val date = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
+
+        val postData = hashMapOf(
+            "Post ID" to "post.$date",
+            "Profile Name" to userName,
+            "Profile Image Url" to userImageUrl,
+            "Description" to description,
+            "Content Url" to null,
+            "No Of Likes" to "0",
+            "List Of Reactors" to "",
+            "Upload Date" to dateAndTime
+        )
+        firebaseDB.collection("Post").document("post_$date").set(postData)
+            .addOnSuccessListener {
+                responseDBLivedata.postValue(Response.Success())
+                fetchPost(user)
+            }
+            .addOnFailureListener {
+                responseDBLivedata.postValue(Response.Failure(it.toString()))
+            }
+    }
+
+    private fun fetchPost(user: FirebaseUser) {
+        firebaseDB.collection("Post").get()
+            .addOnSuccessListener { documents ->
+                val list = ArrayList<MutableList<String?>>()
+                for (document in documents) {
+                    list.add(
+                        mutableListOf(
+                            document.getString("Profile Name"),
+                            document.getString("Profile Image Url"),
+                            document.getString("Description"),
+                            document.getString("Content Url"),
+                            document.getString("No Of Likes"),
+                            document.getString("List Of Reactors")
+                        )
+                    )
+                }
+                responseDBLivedata.postValue(Response.Success())
+                postLivedata.postValue(list)
+            }
             .addOnFailureListener {
                 responseDBLivedata.postValue(Response.Failure(it.toString()))
             }
