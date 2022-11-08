@@ -93,7 +93,7 @@ class SignIn : Fragment() {
             appViewModel!!.login(email, password)
             Handler().postDelayed({
                 appViewModel!!.response.observe(
-                    requireActivity()
+                    viewLifecycleOwner
                 ) {
                     when (it) {
                         is Response.Success -> {

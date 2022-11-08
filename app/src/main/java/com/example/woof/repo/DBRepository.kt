@@ -6,12 +6,15 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
 
 
+@Suppress("UNUSED_CHANGED_VALUE")
 class DBRepository(private val application: Application) {
 
     private val firebaseStorage = FirebaseStorage.getInstance()
@@ -25,9 +28,15 @@ class DBRepository(private val application: Application) {
     val userProfileData: LiveData<MutableList<String?>>
         get() = userProfileLivedata
 
-    private val postLivedata = MutableLiveData<ArrayList<MutableList<String?>>>()
-    val postData: LiveData<ArrayList<MutableList<String?>>>
+    private val postLivedata = MutableLiveData<MutableList<DocumentSnapshot>>()
+    val postData: LiveData<MutableList<DocumentSnapshot>>
         get() = postLivedata
+
+    private val hospitalLivedata = MutableLiveData<MutableList<DocumentSnapshot>>()
+    val hospitalData: LiveData<MutableList<DocumentSnapshot>>
+        get() = hospitalLivedata
+
+
 
     fun uploadImageToStorage(imageUri: Uri, user: FirebaseUser) {
         val ref = firebaseStorage.reference.child("images/${user.uid}/${imageUri.lastPathSegment}")
@@ -127,16 +136,33 @@ class DBRepository(private val application: Application) {
         description: String?,
         imageUri: Uri?
     ) {
-        val dateAndTime = SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa", Locale.getDefault()).format(Date())
+        val dateAndTime =
+            SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa", Locale.getDefault()).format(Date())
         val date = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
-        var url = ""
         val ref = firebaseStorage.reference.child("post/${user.uid}/${imageUri!!.lastPathSegment}")
         ref.putFile(imageUri)
             .addOnSuccessListener {
                 ref.downloadUrl
-                    .addOnSuccessListener {
+                    .addOnSuccessListener { uri ->
+                        val postData = hashMapOf(
+                            "Post ID" to "post_$date",
+                            "Profile Name" to userName,
+                            "Profile Image Url" to userImageUrl,
+                            "Description" to description,
+                            "Content Url" to uri.toString(),
+                            "No Of Likes" to "0",
+                            "List Of Reactors" to "",
+                            "Upload Date" to dateAndTime
+                        )
                         responseDBLivedata.postValue(Response.Success())
-                        url = it.toString()
+                        firebaseDB.collection("Post").document("post_$date").set(postData)
+                            .addOnSuccessListener {
+                                responseDBLivedata.postValue(Response.Success())
+                                fetchPost()
+                            }
+                            .addOnFailureListener {
+                                responseDBLivedata.postValue(Response.Failure(it.toString()))
+                            }
                     }
                     .addOnFailureListener {
                         responseDBLivedata.postValue(Response.Failure(it.toString()))
@@ -146,24 +172,6 @@ class DBRepository(private val application: Application) {
                 responseDBLivedata.postValue(Response.Failure(it.toString()))
             }
 
-        val postData = hashMapOf(
-            "Post ID" to "post.$date",
-            "Profile Name" to userName,
-            "Profile Image Url" to userImageUrl,
-            "Description" to description,
-            "Content Url" to url,
-            "No Of Likes" to "0",
-            "List Of Reactors" to "",
-            "Upload Date" to dateAndTime
-        )
-        firebaseDB.collection("Post").document("post_$date").set(postData)
-            .addOnSuccessListener {
-                responseDBLivedata.postValue(Response.Success())
-                fetchPost(user)
-            }
-            .addOnFailureListener {
-                responseDBLivedata.postValue(Response.Failure(it.toString()))
-            }
     }
 
     fun uploadPostWithOutImage(
@@ -172,11 +180,12 @@ class DBRepository(private val application: Application) {
         userImageUrl: String,
         description: String?,
     ) {
-        val dateAndTime = SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa", Locale.getDefault()).format(Date())
+        val dateAndTime =
+            SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa", Locale.getDefault()).format(Date())
         val date = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
 
         val postData = hashMapOf(
-            "Post ID" to "post.$date",
+            "Post ID" to "post_$date",
             "Profile Name" to userName,
             "Profile Image Url" to userImageUrl,
             "Description" to description,
@@ -188,28 +197,19 @@ class DBRepository(private val application: Application) {
         firebaseDB.collection("Post").document("post_$date").set(postData)
             .addOnSuccessListener {
                 responseDBLivedata.postValue(Response.Success())
-                fetchPost(user)
+                fetchPost()
             }
             .addOnFailureListener {
                 responseDBLivedata.postValue(Response.Failure(it.toString()))
             }
     }
 
-    private fun fetchPost(user: FirebaseUser) {
+    fun fetchPost() {
         firebaseDB.collection("Post").get()
             .addOnSuccessListener { documents ->
-                val list = ArrayList<MutableList<String?>>()
+                val list = mutableListOf<DocumentSnapshot>()
                 for (document in documents) {
-                    list.add(
-                        mutableListOf(
-                            document.getString("Profile Name"),
-                            document.getString("Profile Image Url"),
-                            document.getString("Description"),
-                            document.getString("Content Url"),
-                            document.getString("No Of Likes"),
-                            document.getString("List Of Reactors")
-                        )
-                    )
+                    list.add(document)
                 }
                 responseDBLivedata.postValue(Response.Success())
                 postLivedata.postValue(list)
@@ -218,4 +218,48 @@ class DBRepository(private val application: Application) {
                 responseDBLivedata.postValue(Response.Failure(it.toString()))
             }
     }
+
+    @SuppressLint("SuspiciousIndentation")
+    fun giveLikes(user: FirebaseUser, id: String?) {
+        val doc = firebaseDB.collection("Post").document(id!!)
+        doc.get()
+            .addOnSuccessListener {
+                var likes: Int = Integer.parseInt(it.getString("No Of Likes")!!)
+                var likeList = it.getString("List Of Reactors")
+                if (likeList!!.contains(user.uid)) {
+                    likeList = likeList.replace(user.uid, "")
+                    likes--
+                } else {
+                    likeList += user.uid + " "
+                    likes++
+                }
+                doc.update("No Of Likes", "$likes")
+                doc.update("List Of Reactors", likeList)
+            }
+    }
+
+    fun fetchHospitals() {
+        firebaseDB.collection("Hospital").get()
+            .addOnSuccessListener { documents ->
+                val list = mutableListOf<DocumentSnapshot>()
+                for (document in documents) {
+                    list.add(document)
+                }
+                responseDBLivedata.postValue(Response.Success())
+                hospitalLivedata.postValue(list)
+            }
+            .addOnFailureListener {
+                responseDBLivedata.postValue(Response.Failure(it.toString()))
+            }
+    }
+
+//    fun getLikeList(user: FirebaseUser, id: String?) {
+//        val doc = firebaseDB.collection("Post").document(id!!)
+//        doc.get()
+//            .addOnSuccessListener {
+//                val likeList = it.getString("List Of Reactors")
+//                if (likeList!!.contains(user.uid)) isLikeLiveData.postValue("true")
+//                else isLikeLiveData.postValue("false")
+//            }
+//    }
 }

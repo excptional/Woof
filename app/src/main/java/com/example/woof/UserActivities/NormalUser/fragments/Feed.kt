@@ -1,5 +1,6 @@
 package com.example.woof.UserActivities.NormalUser.fragments
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -13,24 +14,28 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.example.woof.R
-import com.example.woof.UserActivities.NormalUser.FeedAdapter
-import com.example.woof.UserActivities.NormalUser.PostItem
+import com.example.woof.UserActivities.NormalUser.adapters.FeedAdapter
+import com.example.woof.UserActivities.NormalUser.items.PostItem
+import com.example.woof.repo.Response
 import com.example.woof.viewmodel.AppViewModel
 import com.example.woof.viewmodel.DBViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentSnapshot
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import de.hdodenhof.circleimageview.CircleImageView
 import org.ocpsoft.prettytime.PrettyTime
-import java.text.SimpleDateFormat
 import java.util.*
 
 class Feed : Fragment() {
@@ -40,9 +45,10 @@ class Feed : Fragment() {
     private var dbViewModel: DBViewModel? = null
     private var appViewModel: AppViewModel? = null
     private lateinit var myUser: FirebaseUser
-    private lateinit var userName:String
+    private lateinit var userName: String
     private lateinit var userImageUrl: String
     private var contentUri: Uri? = null
+    private lateinit var progressbarFeed: LottieAnimationView
 
     private val cropActivityResultContract = object : ActivityResultContract<Any?, Uri?>() {
         override fun createIntent(context: Context, input: Any?): Intent {
@@ -60,6 +66,7 @@ class Feed : Fragment() {
 
     private lateinit var cropActivityResultLauncher: ActivityResultLauncher<Any?>
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,11 +74,31 @@ class Feed : Fragment() {
         val view = inflater.inflate(R.layout.fragment_feed, container, false)
         appViewModel = ViewModelProvider(this)[AppViewModel::class.java]
         dbViewModel = ViewModelProvider(this)[DBViewModel::class.java]
+        val swipeRefreshLayout: SwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout_feed)
+        val homeRecyclerView: RecyclerView = view.findViewById(R.id.feedRecyclerView)
+        val fab: FloatingActionButton = view.findViewById(R.id.fab_feed)
+        progressbarFeed = view.findViewById(R.id.progressbar_feed)
+        progressbarFeed.visibility = View.VISIBLE
 
-        appViewModel!!.userdata.observe(requireActivity()) { user ->
+        appViewModel!!.userdata.observe(viewLifecycleOwner) { user ->
             if (user != null) {
                 myUser = user
+                feedAdapter =
+                    FeedAdapter(postItemsArray, user, requireActivity())
+                homeRecyclerView.layoutManager = LinearLayoutManager(view.context)
+                homeRecyclerView.setHasFixedSize(true)
+                homeRecyclerView.adapter = feedAdapter
+                dbViewModel!!.fetchPost()
                 dbViewModel!!.getProfileData(user)
+            }
+        }
+
+        swipeRefreshLayout.setOnRefreshListener {
+            progressbarFeed.visibility = View.VISIBLE
+            dbViewModel!!.fetchPost()
+            dbViewModel!!.postData.observe(viewLifecycleOwner) {
+                fetchData(it)
+                swipeRefreshLayout.isRefreshing = false
             }
         }
 
@@ -88,9 +115,9 @@ class Feed : Fragment() {
         val postContentLayout: RelativeLayout = dialog.findViewById(R.id.post_content_layout)
         val emptyContentLayout: LinearLayout = dialog.findViewById(R.id.empty_content_layout_post)
         val uploadContent: ImageView = dialog.findViewById(R.id.upload_content_post)
-        val uploadAnotherContent: ImageView = dialog.findViewById(R.id.upload_another_content_post)
         val clearContent: ImageView = dialog.findViewById(R.id.clear_content_post)
-        val sendBtn: ImageView = dialog.findViewById(R.id.send_post)
+        val sendBtn: CardView = dialog.findViewById(R.id.send_post)
+        val cancelBtn: CardView = dialog.findViewById(R.id.cancel_post)
 
         cropActivityResultLauncher = registerForActivityResult(cropActivityResultContract) { uri ->
             if (uri != null) {
@@ -113,27 +140,52 @@ class Feed : Fragment() {
             postContentImage.setImageURI(null)
         }
 
-        uploadAnotherContent.setOnClickListener {
-            cropActivityResultLauncher.launch(null)
+        cancelBtn.setOnClickListener {
+            postContentImage.setImageURI(null)
+            postDescription.text = null
+            dialog.hide()
+            Toast.makeText(requireContext(), " Post cancel", Toast.LENGTH_SHORT).show()
         }
 
         sendBtn.setOnClickListener {
-            if(contentUri == null){
-                dbViewModel!!.uploadPostWithOutImage(myUser, userName, userImageUrl, postDescription.text.toString())
-            }else{
-                dbViewModel!!.uploadPostWithImage(myUser, userName, userImageUrl, postDescription.text.toString(), contentUri)
+            if ((contentUri == null) && postDescription.text.isNullOrBlank()) {
+                Toast.makeText(
+                    requireContext(),
+                    "You can't upload a empty post",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (contentUri == null) {
+                dbViewModel!!.uploadPostWithOutImage(
+                    myUser,
+                    userName,
+                    userImageUrl,
+                    postDescription.text.toString()
+                )
+                Toast.makeText (requireContext(),
+                    "Your post uploaded",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                dbViewModel!!.uploadPostWithImage(
+                    myUser,
+                    userName,
+                    userImageUrl,
+                    postDescription.text.toString(),
+                    contentUri
+                )
+                Toast . makeText (requireContext(),
+                    "Your post uploaded",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             postDescription.text = null
             postContentImage.setImageURI(null)
             dialog.hide()
-            Toast.makeText(requireContext(), "Uploading...", Toast.LENGTH_SHORT).show()
+
         }
 
-        val homeRecyclerView: RecyclerView = view.findViewById(R.id.homeRecyclerView)
-        val fab: FloatingActionButton = view.findViewById(R.id.fab_feed)
-
         fab.setOnClickListener {
-            dbViewModel!!.profileData.observe(requireActivity()) { dataList ->
+            dbViewModel!!.profileData.observe(viewLifecycleOwner) { dataList ->
                 postProfileName.text = dataList[1]!!
                 Glide.with(requireActivity()).load(dataList[2]!!).into(postProfileImage)
                 userName = dataList[1]!!
@@ -142,33 +194,39 @@ class Feed : Fragment() {
             dialog.show()
         }
 
-        homeRecyclerView.layoutManager = LinearLayoutManager(view.context)
-        homeRecyclerView.setHasFixedSize(true)
-        feedAdapter = FeedAdapter(postItemsArray)
-        fetchData()
-        homeRecyclerView.adapter = feedAdapter
-
+        dbViewModel!!.dbLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is Response.Success -> {
+                    dbViewModel!!.postData.observe(viewLifecycleOwner) {
+                        fetchData(it)
+                    }
+                }
+                is Response.Failure -> {
+                    Toast.makeText(requireActivity(), it.errorMassage, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
         return view
     }
 
-    fun getTimeAgo(date: String) :  String?{
-        val date2 = SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa", Locale.getDefault()).format(Date())
-        val prettyTime = PrettyTime(Locale.getDefault())
-        return prettyTime.format(Date(date2))
-    }
-
-    private fun fetchData() {
+    private fun fetchData(list: MutableList<DocumentSnapshot>) {
         postItemsArray = arrayListOf()
-        for (i in 1 until 51) {
+        for (i in list) {
+            val prettyTime = PrettyTime(Locale.getDefault())
+            val ago: String = prettyTime.format(Date(i.getString("Upload Date")))
             val post = PostItem(
-                "UserName$i",
-                null,
-                "date$i",
-                "description$i",
-                null
+                i.getString("Profile Name"),
+                i.getString("Profile Image Url"),
+                ago,
+                i.getString("Description"),
+                i.getString("Content Url"),
+                i.getString("No Of Likes"),
+                i.getString("List Of Reactors"),
+                i.getString("Post ID")
             )
             postItemsArray.add(post)
         }
-        feedAdapter.updateHomeFeed(postItemsArray)
+        feedAdapter.updateFeed(postItemsArray)
+        progressbarFeed.visibility = View.GONE
     }
 }

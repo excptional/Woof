@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.woof.repo.DBRepository
 import com.example.woof.repo.Response
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentSnapshot
 
 class DBViewModel(application: Application) :
     AndroidViewModel(application) {
@@ -16,10 +17,13 @@ class DBViewModel(application: Application) :
         get() = dbRepository.userProfileData
     val dbLiveData: LiveData<Response<String>>
         get() = dbRepository.responseDB
-    val postData: LiveData<ArrayList<MutableList<String?>>>
+    val postData: LiveData<MutableList<DocumentSnapshot>>
         get() = dbRepository.postData
+    val hospitalData: LiveData<MutableList<DocumentSnapshot>>
+        get() = dbRepository.hospitalData
 
-    fun uploadImageToStorage(imageUri: Uri, user: FirebaseUser){
+
+    fun uploadImageToStorage(imageUri: Uri, user: FirebaseUser) {
         dbRepository.uploadImageToStorage(imageUri, user)
     }
 
@@ -27,7 +31,7 @@ class DBViewModel(application: Application) :
         dbRepository.getProfileData(user)
     }
 
-    fun changeProfileData(user: FirebaseUser, field: String, newData: String){
+    fun changeProfileData(user: FirebaseUser, field: String, newData: String) {
         dbRepository.changeProfileData(user, field, newData)
     }
 
@@ -49,4 +53,20 @@ class DBViewModel(application: Application) :
     ) {
         dbRepository.uploadPostWithOutImage(user, userName, userImageUrl, description)
     }
+
+    fun fetchPost() {
+        dbRepository.fetchPost()
+    }
+
+    fun giveLikes(user: FirebaseUser, id:  String?){
+        dbRepository.giveLikes(user, id)
+    }
+
+    fun fetchHospitals() {
+        dbRepository.fetchHospitals()
+    }
+
+//    fun getLikeList(user: FirebaseUser, id: String?){
+//        dbRepository.getLikeList(user, id)
+//    }
 }

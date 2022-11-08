@@ -1,6 +1,4 @@
-package com.example.woof.UserActivities.NormalUser
-
-import android.net.Uri
+package com.example.woof.UserActivities.NormalUser.items
 
 data class PostItem(
     val userName: String? = null,
@@ -8,6 +6,7 @@ data class PostItem(
     val date: String? = null,
     val description: String? = null,
     val content: String? = null,
-    val likes: Int? = null,
-    val isLike: Boolean? = null
+    val likes: String? = null,
+    val listOfReactors: String? = null,
+    val postID: String? = null
 )

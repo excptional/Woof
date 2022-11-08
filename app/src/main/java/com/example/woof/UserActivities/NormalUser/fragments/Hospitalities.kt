@@ -1,60 +1,97 @@
 package com.example.woof.UserActivities.NormalUser.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.airbnb.lottie.LottieAnimationView
 import com.example.woof.R
+import com.example.woof.UserActivities.NormalUser.adapters.HospitalAdapter
+import com.example.woof.UserActivities.NormalUser.items.HospitalItem
+import com.example.woof.repo.Response
+import com.example.woof.viewmodel.AppViewModel
+import com.example.woof.viewmodel.DBViewModel
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentSnapshot
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Hospitalities.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Hospitalities : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var hospitalAdapter: HospitalAdapter
+    private var hospitalItemsArray = arrayListOf<HospitalItem>()
+    private var dbViewModel: DBViewModel? = null
+    private var appViewModel: AppViewModel? = null
+    private lateinit var myUser: FirebaseUser
+    private lateinit var progressbarHospital: LottieAnimationView
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hospitalities, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_hospitalities, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Hospitalities.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Hospitalities().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        appViewModel = ViewModelProvider(this)[AppViewModel::class.java]
+        dbViewModel = ViewModelProvider(this)[DBViewModel::class.java]
+        val swipeRefreshLayout: SwipeRefreshLayout =
+            view.findViewById(R.id.swipeRefreshLayout_hospital)
+        val hospitalRecyclerView: RecyclerView = view.findViewById(R.id.hospitalRecyclerView)
+        progressbarHospital = view.findViewById(R.id.progressbar_hospital)
+        progressbarHospital.visibility = View.VISIBLE
+
+        dbViewModel!!.fetchHospitals()
+        appViewModel!!.userdata.observe(viewLifecycleOwner) {
+            myUser = it!!
+        }
+
+        hospitalAdapter = HospitalAdapter(hospitalItemsArray)
+        hospitalRecyclerView.layoutManager = LinearLayoutManager(view.context)
+        hospitalRecyclerView.setHasFixedSize(true)
+        hospitalRecyclerView.adapter = hospitalAdapter
+
+        swipeRefreshLayout.setOnRefreshListener {
+            progressbarHospital.visibility = View.VISIBLE
+            dbViewModel!!.fetchPost()
+            dbViewModel!!.hospitalData.observe(viewLifecycleOwner) {
+                fetchData(it)
+                swipeRefreshLayout.isRefreshing = false
+            }
+        }
+
+        dbViewModel!!.dbLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is Response.Success -> {
+                    dbViewModel!!.hospitalData.observe(viewLifecycleOwner) {
+                        fetchData(it)
+                    }
+                }
+                is Response.Failure -> {
+                    Toast.makeText(requireActivity(), it.errorMassage, Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        return view
+    }
+
+    private fun fetchData(list: MutableList<DocumentSnapshot>) {
+        hospitalItemsArray = arrayListOf()
+        for (i in list) {
+            val hospital = HospitalItem(
+                i.getString("Name"),
+                i.getString("City"),
+                i.getString("Ratings")
+            )
+            hospitalItemsArray.add(hospital)
+        }
+        hospitalAdapter.updateHospitals(hospitalItemsArray)
+        progressbarHospital.visibility = View.GONE
     }
 }

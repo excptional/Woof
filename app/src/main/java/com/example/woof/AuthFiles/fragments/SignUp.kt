@@ -205,7 +205,7 @@ class SignUp : Fragment(), AdapterView.OnItemSelectedListener {
                 }
 
                 appViewModel!!.response.observe(
-                    requireActivity()
+                    viewLifecycleOwner
                 ) {
                     when (it) {
                         is Response.Success -> {

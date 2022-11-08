@@ -4,7 +4,8 @@
     android:id="@+id/postItems"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/_2sdp"
+    android:paddingStart="@dimen/_3sdp"
+    android:paddingEnd="@dimen/_3sdp"
     android:gravity="center">
 
     <androidx.cardview.widget.CardView
@@ -32,7 +33,7 @@
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_margin="@dimen/_3sdp"
                     android:src="@drawable/user2" />
 
                 <LinearLayout
@@ -67,7 +68,7 @@
                 android:id="@+id/description_feed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
+                android:layout_margin="@dimen/_7sdp"
                 android:text="description"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp" />
@@ -79,6 +80,11 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/uploadimage" />
 
+            <View
+                android:layout_width="match_parent"
+                android:background="#EDECEC"
+                android:layout_height="@dimen/_1sdp"/>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,21 +92,34 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
+                    android:id="@+id/likeImage_border_feed"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_2sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:src="@drawable/love_border" />
 
+                <ImageView
+                    android:id="@+id/likeImage_normal_feed"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:visibility="gone"
+                    android:src="@drawable/love" />
+
                 <TextView
+                    android:id="@+id/noOfLikes_feed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="300 people likes your post"
                     android:textColor="@color/material_black"
-                    android:textSize="@dimen/_9sdp" />
+                    android:textSize="@dimen/_10sdp" />
 
             </LinearLayout>
 
