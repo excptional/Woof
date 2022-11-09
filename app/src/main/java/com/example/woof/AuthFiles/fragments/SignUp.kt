@@ -1,5 +1,6 @@
 package com.example.woof.AuthFiles.fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
@@ -35,11 +36,13 @@ class SignUp : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var signUpProgressbar: LottieAnimationView
     private lateinit var signInText: TextView
     private lateinit var signUpPhoneNumber: TextInputEditText
+    private lateinit var signUpWhiteLayout: LinearLayout
     private var spinnerText: String = "Select your usertype"
     private val emailPattern by lazy { "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+" }
     private val validNumericPattern by lazy { "^(0|[1-9][0-9]*)\$" }
     private var appViewModel: AppViewModel? = null
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,6 +65,7 @@ class SignUp : Fragment(), AdapterView.OnItemSelectedListener {
         signUpPetNameLayout = view.findViewById(R.id.signUpPetNameLayout)
         signInText = view.findViewById(R.id.signInText)
         signUpPhoneNumber = view.findViewById(R.id.signUpPhone)
+        signUpWhiteLayout = view.findViewById(R.id.signUpWhiteLayout)
 
         signInText.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.authFrameLayout, SignIn()).commit()
@@ -134,9 +138,11 @@ class SignUp : Fragment(), AdapterView.OnItemSelectedListener {
 
     private fun signUp() {
         signUpProgressbar.visibility = View.VISIBLE
+        signUpWhiteLayout.visibility = View.VISIBLE
 
         if (spinnerText == "Select your usertype") {
             signUpProgressbar.visibility = View.GONE
+            signUpWhiteLayout.visibility = View.GONE
             Toast.makeText(
                 requireActivity().applicationContext,
                 "Nothing selected...select user type to continue",
@@ -192,6 +198,7 @@ class SignUp : Fragment(), AdapterView.OnItemSelectedListener {
             }
             if (!allRight) {
                 signUpProgressbar.visibility = View.GONE
+                signUpWhiteLayout.visibility = View.GONE
                 Toast.makeText(
                     requireActivity().applicationContext,
                     "Fill up your details properly",
@@ -210,6 +217,7 @@ class SignUp : Fragment(), AdapterView.OnItemSelectedListener {
                     when (it) {
                         is Response.Success -> {
                             signUpProgressbar.visibility = View.GONE
+                            signUpWhiteLayout.visibility = View.GONE
                             requireActivity().startActivity(Intent(activity, SplashScreen::class.java))
                         }
                         is Response.Failure -> {
@@ -219,6 +227,7 @@ class SignUp : Fragment(), AdapterView.OnItemSelectedListener {
                                 Toast.LENGTH_SHORT
                             ).show()
                             signUpProgressbar.visibility = View.GONE
+                            signUpWhiteLayout.visibility = View.GONE
                         }
                         else -> {}
                     }

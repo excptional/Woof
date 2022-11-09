@@ -5,20 +5,23 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.findFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.example.woof.R
+import com.example.woof.UserActivities.NormalUser.fragments.Home
 import com.example.woof.UserActivities.UserProfileActivity
 import com.example.woof.databinding.ActivityNormalUserBinding
 import com.example.woof.viewmodel.AppViewModel
@@ -88,7 +91,7 @@ class NormalUserActivity : AppCompatActivity() {
 
     }
 
-    private fun getDataFromDatabase(user: FirebaseUser){
+    private fun getDataFromDatabase(user: FirebaseUser) {
         dbViewModel!!.getProfileData(user)
         dbViewModel!!.profileData.observe(this) { dataList ->
             name.text = dataList[1]
@@ -110,5 +113,6 @@ class NormalUserActivity : AppCompatActivity() {
     override fun onBackPressed() {
         finishAffinity()
         finish()
+
     }
 }

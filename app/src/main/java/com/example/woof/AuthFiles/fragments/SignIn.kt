@@ -1,11 +1,13 @@
 package com.example.woof.AuthFiles.fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -27,9 +29,11 @@ class SignIn : Fragment() {
     private lateinit var signInProgressbar: LottieAnimationView
     private lateinit var signInBtn: CardView
     private lateinit var signUpText: TextView
+    private lateinit var signInWhiteLayout: LinearLayout
     private val emailPattern by lazy { "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+" }
     private var appViewModel: AppViewModel? = null
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,6 +48,7 @@ class SignIn : Fragment() {
         signInBtn = view.findViewById(R.id.signInButton)
         signInProgressbar = view.findViewById(R.id.signInProgressbar)
         signUpText = view.findViewById(R.id.signUpText)
+        signInWhiteLayout = view.findViewById(R.id.signInWhiteLayout)
 
         signUpText.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.authFrameLayout, SignUp()).commit()
@@ -57,6 +62,7 @@ class SignIn : Fragment() {
     }
 
     private fun signIn() {
+        signInWhiteLayout.visibility = View.VISIBLE
         signInProgressbar.visibility = View.VISIBLE
 
         val email = signInEmail.text.toString()
@@ -84,6 +90,7 @@ class SignIn : Fragment() {
 
         if (!allRight) {
             signInProgressbar.visibility = View.GONE
+            signInWhiteLayout.visibility = View.GONE
             Toast.makeText(
                 requireActivity().applicationContext,
                 "Fill up your details properly",
@@ -99,6 +106,7 @@ class SignIn : Fragment() {
                         is Response.Success -> {
                             requireActivity().startActivity(Intent(activity, SplashScreen::class.java))
                             signInProgressbar.visibility = View.GONE
+                            signInWhiteLayout.visibility = View.GONE
                         }
                         is Response.Failure -> {
                             Toast.makeText(

@@ -29,7 +29,7 @@ class AppRepository(private val application: Application) {
                     responseLiveData.postValue(Response.Success())
                     userLiveData.postValue(firebaseAuth.currentUser)
                 } else {
-                    responseLiveData.postValue(Response.Failure(task.exception!!.cause.toString()))
+                    responseLiveData.postValue(Response.Failure(getErrorMassage(task.exception!!)))
                 }
             }
     }
@@ -59,17 +59,17 @@ class AppRepository(private val application: Application) {
                         .addOnSuccessListener {
                             responseLiveData.postValue(Response.Success())
                         }.addOnFailureListener {
-                            responseLiveData.postValue(Response.Failure(task.exception!!.cause.toString()))
+                            responseLiveData.postValue(Response.Failure(getErrorMassage(task.exception!!)))
                         }
                     firebaseDB.collection("Normal User").document(firebaseAuth.currentUser!!.uid)
                         .set(data)
                         .addOnSuccessListener {
                             responseLiveData.postValue(Response.Success())
                         }.addOnFailureListener {
-                            responseLiveData.postValue(Response.Failure(task.exception!!.cause.toString()))
+                            responseLiveData.postValue(Response.Failure(getErrorMassage(task.exception!!)))
                         }
                 } else {
-                    responseLiveData.postValue(Response.Failure(task.exception!!.cause.toString()))
+                    responseLiveData.postValue(Response.Failure(getErrorMassage(task.exception!!)))
                 }
             }
     }
@@ -99,17 +99,17 @@ class AppRepository(private val application: Application) {
                         .addOnSuccessListener {
                             responseLiveData.postValue(Response.Success())
                         }.addOnFailureListener {
-                            responseLiveData.postValue(Response.Failure(it.cause.toString()))
+                            responseLiveData.postValue(Response.Failure(it.toString()))
                         }
                     firebaseDB.collection("Seller").document(firebaseAuth.currentUser!!.uid)
                         .set(data)
                         .addOnSuccessListener {
                             responseLiveData.postValue(Response.Success())
                         }.addOnFailureListener {
-                            responseLiveData.postValue(Response.Failure(it.cause.toString()))
+                            responseLiveData.postValue(Response.Failure(it.toString()))
                         }
                 } else {
-                    responseLiveData.postValue(Response.Failure(task.exception.toString()))
+                    responseLiveData.postValue(Response.Failure(getErrorMassage(task.exception!!)))
                 }
             }
     }
@@ -139,17 +139,17 @@ class AppRepository(private val application: Application) {
                         .addOnSuccessListener {
                             responseLiveData.postValue(Response.Success())
                         }.addOnFailureListener {
-                            responseLiveData.postValue(Response.Failure(it.cause.toString()))
+                            responseLiveData.postValue(Response.Failure(it.toString()))
                         }
                     firebaseDB.collection("Doctor").document(firebaseAuth.currentUser!!.uid)
                         .set(data)
                         .addOnSuccessListener {
                             responseLiveData.postValue(Response.Success())
                         }.addOnFailureListener {
-                            responseLiveData.postValue(Response.Failure(it.cause.toString()))
+                            responseLiveData.postValue(Response.Failure(it.toString()))
                         }
                 } else {
-                    responseLiveData.postValue(Response.Failure(task.exception.toString()))
+                    responseLiveData.postValue(Response.Failure(getErrorMassage(task.exception!!)))
                 }
             }
     }
@@ -170,6 +170,11 @@ class AppRepository(private val application: Application) {
             .addOnFailureListener {
                 usertype.postValue(it.toString())
             }
+    }
+
+    private fun getErrorMassage(e: Exception): String{
+        val colonIndex = e.toString().indexOf(":")
+        return e.toString().substring(colonIndex + 2)
     }
 
     init {

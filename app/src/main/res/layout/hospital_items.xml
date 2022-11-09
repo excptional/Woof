@@ -2,18 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/postItems"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingStart="@dimen/_3sdp"
-    android:paddingEnd="@dimen/_3sdp"
+    android:layout_width="@dimen/_200sdp"
+    android:layout_height="@dimen/_110sdp"
     android:gravity="center">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_110sdp"
+        android:layout_height="match_parent"
         app:cardBackgroundColor="@color/light_cream"
         app:cardCornerRadius="@dimen/_5sdp"
         app:cardElevation="@dimen/_3sdp"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -22,33 +22,33 @@
             android:orientation="horizontal"
             android:padding="@dimen/_5sdp">
 
-           <ImageView
-               android:layout_width="@dimen/_70sdp"
-               android:layout_height="@dimen/_70sdp"
-               android:src="@drawable/hospital2"
-               android:scaleType="centerCrop"
-               android:layout_gravity="center_vertical"
-               android:layout_margin="@dimen/_5sdp"/>
+            <ImageView
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/_5sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/hospital2" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_5sdp"
                 android:layout_gravity="center_vertical"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp">
 
                 <TextView
                     android:id="@+id/name_hospital"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hospital Name"
-                    android:maxLines="1"
+                    android:layout_gravity="end"
                     android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="Hospital Name"
                     android:textAlignment="textEnd"
                     android:textColor="@color/material_black"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_13sdp"
-                    android:layout_gravity="end"/>
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -62,15 +62,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kolkata"
-                        android:textStyle="bold"
                         android:textColor="#1976D2"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:layout_width="@dimen/_12sdp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_2sdp"
-                        android:src="@drawable/location"/>
+                        android:src="@drawable/location" />
 
                 </LinearLayout>
 
@@ -83,49 +83,24 @@
 
                     <RatingBar
                         android:id="@+id/ratingBar_hospital"
+                        style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_10sdp"
+                        android:layout_gravity="center_vertical"
                         android:numStars="5"
-                        android:stepSize="0.1"
-                        style="?android:attr/ratingBarStyleSmall"
-                        android:layout_gravity="center_vertical"/>
+                        android:stepSize="0.1" />
 
                     <TextView
                         android:id="@+id/ratingText_hospital"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="3.8"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:textStyle="bold"
+                        android:text="3.8"
                         android:textColor="@color/material_black"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/moreDetails_hospital"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="more details"
-                        android:textStyle="normal"
-                        android:layout_marginTop="@dimen/_3sdp"
-                        android:textColor="@color/material_black"
-                        android:textSize="@dimen/_9sdp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_12sdp"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/down_arrow"/>
-
-                </LinearLayout>
-
 
             </LinearLayout>
 

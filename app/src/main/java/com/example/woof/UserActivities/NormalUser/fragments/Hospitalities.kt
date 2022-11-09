@@ -52,7 +52,7 @@ class Hospitalities : Fragment() {
         }
 
         hospitalAdapter = HospitalAdapter(hospitalItemsArray)
-        hospitalRecyclerView.layoutManager = LinearLayoutManager(view.context)
+        hospitalRecyclerView.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
         hospitalRecyclerView.setHasFixedSize(true)
         hospitalRecyclerView.adapter = hospitalAdapter
 

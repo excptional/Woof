@@ -11,20 +11,83 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/hospitalRecyclerView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/hospital_items" />
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_margin="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:orientation="horizontal">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:scaleY="2"
+                    android:scaleX="2"
+                    app:lottie_rawRes="@raw/catseating"
+                    android:rotationY="180"
+                    app:lottie_autoPlay="true"
+                    android:layout_gravity="bottom"
+                    app:lottie_loop="true"/>
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:scaleY="1.4"
+                    android:scaleX="1.4"
+                    app:lottie_rawRes="@raw/medicalstuffs"
+                    app:lottie_autoPlay="true"
+                    android:layout_gravity="center"
+                    app:lottie_loop="true"/>
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    app:lottie_rawRes="@raw/dogsitting"
+                    app:lottie_autoPlay="true"
+                    android:layout_gravity="bottom"
+                    app:lottie_loop="true"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:text="Hospitals and clinics"
+                android:textColor="@color/material_black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hospitalRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/hospital_items" />
+
+        </LinearLayout>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progressbar_hospital"
-            android:layout_width="@dimen/_50sdp"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_50sdp"
-            app:lottie_rawRes="@raw/pawdogprogressbar"
-            app:lottie_loop="true"
+            android:layout_centerInParent="true"
             app:lottie_autoPlay="true"
-            android:layout_centerInParent="true"/>
+            app:lottie_loop="true"
+            android:scaleX="2"
+            android:scaleY="2"
+            app:lottie_rawRes="@raw/loaderorange" />
 
     </RelativeLayout>
 

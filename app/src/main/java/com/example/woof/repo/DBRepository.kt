@@ -48,11 +48,11 @@ class DBRepository(private val application: Application) {
                         uploadImageUrlToDatabase(it, user)
                     }
                     .addOnFailureListener {
-                        responseDBLivedata.postValue(Response.Failure(it.toString()))
+                        responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
                     }
             }
             .addOnFailureListener {
-                responseDBLivedata.postValue(Response.Failure(it.toString()))
+                responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
             }
     }
 
@@ -72,7 +72,7 @@ class DBRepository(private val application: Application) {
                         responseDBLivedata.postValue(Response.Failure("Something went wrong!"))
                     }
                 }.addOnFailureListener {
-                    responseDBLivedata.postValue(Response.Failure(it.toString()))
+                    responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
                 }
             } else {
                 responseDBLivedata.postValue(Response.Failure("Document not exist"))
@@ -117,14 +117,14 @@ class DBRepository(private val application: Application) {
                     responseDBLivedata.postValue(Response.Success())
                 }
                     .addOnFailureListener {
-                        responseDBLivedata.postValue(Response.Failure(it.toString()))
+                        responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
                     }
             } else {
                 responseDBLivedata.postValue(Response.Failure("Document not exist"))
             }
         }
             .addOnFailureListener {
-                responseDBLivedata.postValue(Response.Failure(it.toString()))
+                responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
             }
     }
 
@@ -161,15 +161,15 @@ class DBRepository(private val application: Application) {
                                 fetchPost()
                             }
                             .addOnFailureListener {
-                                responseDBLivedata.postValue(Response.Failure(it.toString()))
+                                responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
                             }
                     }
                     .addOnFailureListener {
-                        responseDBLivedata.postValue(Response.Failure(it.toString()))
+                        responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
                     }
             }
             .addOnFailureListener {
-                responseDBLivedata.postValue(Response.Failure(it.toString()))
+                responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
             }
 
     }
@@ -200,7 +200,7 @@ class DBRepository(private val application: Application) {
                 fetchPost()
             }
             .addOnFailureListener {
-                responseDBLivedata.postValue(Response.Failure(it.toString()))
+                responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
             }
     }
 
@@ -215,7 +215,7 @@ class DBRepository(private val application: Application) {
                 postLivedata.postValue(list)
             }
             .addOnFailureListener {
-                responseDBLivedata.postValue(Response.Failure(it.toString()))
+                responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
             }
     }
 
@@ -249,8 +249,13 @@ class DBRepository(private val application: Application) {
                 hospitalLivedata.postValue(list)
             }
             .addOnFailureListener {
-                responseDBLivedata.postValue(Response.Failure(it.toString()))
+                responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
             }
+    }
+
+    private fun getErrorMassage(e: Exception): String{
+        val colonIndex = e.toString().indexOf(":")
+        return e.toString().substring(colonIndex + 2)
     }
 
 //    fun getLikeList(user: FirebaseUser, id: String?) {
