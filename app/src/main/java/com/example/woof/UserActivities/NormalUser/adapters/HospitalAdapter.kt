@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.woof.R
 import com.example.woof.UserActivities.NormalUser.items.HospitalItem
@@ -27,6 +29,9 @@ class HospitalAdapter (
         holder.locationHospital.text = currentItem.hospitalLocation
         holder.ratingTextHospital.text = currentItem.rating
         holder.ratingBarHospital.rating = currentItem.rating!!.toFloat()
+        holder.itemLayoutHospital.setOnClickListener {
+
+        }
     }
 
     override fun getItemCount(): Int {
@@ -45,5 +50,6 @@ class HospitalAdapter (
         val locationHospital: TextView = itemView.findViewById(R.id.location_hospital)
         val ratingBarHospital: RatingBar = itemView.findViewById(R.id.ratingBar_hospital)
         val ratingTextHospital: TextView = itemView.findViewById(R.id.ratingText_hospital)
+        val itemLayoutHospital: CardView = itemView.findViewById(R.id.itemLayout_hospital)
     }
 }
