@@ -21,7 +21,9 @@ class AuthenticationActivity : AppCompatActivity() {
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        finishAffinity()
-        finish()
+        if (supportFragmentManager.findFragmentById(R.id.authFrameLayout) == SignIn()) {
+            finishAffinity()
+            finish()
+        }
     }
 }

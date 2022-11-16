@@ -7,16 +7,25 @@
     android:background="#F2F5F6"
     tools:context=".UserActivities.UserProfileActivity">
 
+    <LinearLayout
+        android:id="@+id/signUpWhiteLayoutProfile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#79FFFFFF"
+        android:visibility="gone"
+        android:orientation="horizontal" />
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/progressbarProfile"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_100sdp"
         android:layout_centerInParent="true"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:visibility="visible"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_colorFilter="@color/lightest_red"
-        android:visibility="visible"
-        app:lottie_rawRes="@raw/roundprogressbar" />
+        app:lottie_rawRes="@raw/loaderorange" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

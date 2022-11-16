@@ -1,19 +1,19 @@
 package com.example.woof.UserActivities.NormalUser.adapters
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.woof.R
 import com.example.woof.UserActivities.NormalUser.items.HospitalItem
-import com.example.woof.UserActivities.NormalUser.items.PostItem
 
-class HospitalAdapter (
+class HospitalAdapter(
     private val hospitalItems: ArrayList<HospitalItem>
 ) :
     RecyclerView.Adapter<HospitalAdapter.HospitalViewHolder>() {
@@ -29,8 +29,17 @@ class HospitalAdapter (
         holder.locationHospital.text = currentItem.hospitalLocation
         holder.ratingTextHospital.text = currentItem.rating
         holder.ratingBarHospital.rating = currentItem.rating!!.toFloat()
-        holder.itemLayoutHospital.setOnClickListener {
 
+        val bundle = Bundle()
+        bundle.putString("name", currentItem.hospitalName)
+        bundle.putString("number", currentItem.hospitalNumber)
+        bundle.putString("address", currentItem.hospitalAddress)
+        bundle.putString("website", currentItem.hospitalWebsite)
+        bundle.putString("ratings", currentItem.rating.toFloat().toString())
+//        HospitalLocation().arguments = bundle
+
+        holder.itemLayoutHospital.setOnClickListener {
+           Navigation.findNavController(it).navigate(R.id.nav_hospital_map, bundle)
         }
     }
 

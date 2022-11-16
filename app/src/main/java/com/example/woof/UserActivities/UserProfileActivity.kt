@@ -63,6 +63,8 @@ class UserProfileActivity : AppCompatActivity() {
         get() = findViewById(R.id.tradeLicenseEditLayout)
     private val signOutBtn: CardView
         get() = findViewById(R.id.sign_out_btn)
+    private val whiteLayout: LinearLayout
+        get() = findViewById(R.id.signUpWhiteLayoutProfile)
 
     private val cropActivityResultContract = object : ActivityResultContract<Any?, Uri?>() {
         override fun createIntent(context: Context, input: Any?): Intent {
@@ -99,6 +101,7 @@ class UserProfileActivity : AppCompatActivity() {
         cropActivityResultLauncher = registerForActivityResult(cropActivityResultContract) { uri ->
             if (uri != null) {
                 progressBar.visibility = View.VISIBLE
+                whiteLayout.visibility = View.VISIBLE
                 uploadImage.isClickable = false
                 userNameLayout.isClickable = false
                 petNameLayout.isClickable = false
@@ -118,6 +121,7 @@ class UserProfileActivity : AppCompatActivity() {
                 getDataFromDatabase(user)
             } else {
                 progressBar.visibility = View.GONE
+                whiteLayout.visibility = View.GONE
             }
         }
 
@@ -163,6 +167,7 @@ class UserProfileActivity : AppCompatActivity() {
 
         dialogDoneBtn.setOnClickListener {
             progressBar.visibility = View.VISIBLE
+            whiteLayout.visibility = View.VISIBLE
             uploadImage.isClickable = false
             userNameLayout.isClickable = false
             petNameLayout.isClickable = false
@@ -178,10 +183,12 @@ class UserProfileActivity : AppCompatActivity() {
                             getDataFromDatabase(myUser)
                             Toast.makeText(this@UserProfileActivity, "Your profile data updated successfully", Toast.LENGTH_SHORT).show()
                             progressBar.visibility = View.GONE
+                            whiteLayout.visibility = View.GONE
                         }
                         is Response.Failure -> {
                             Toast.makeText(this@UserProfileActivity, it.errorMassage, Toast.LENGTH_SHORT).show()
                             progressBar.visibility = View.GONE
+                            whiteLayout.visibility = View.GONE
                         }
                     }
                 }
@@ -201,11 +208,13 @@ class UserProfileActivity : AppCompatActivity() {
             when (it) {
                 is Response.Success -> {
                     progressBar.visibility = View.GONE
+                    whiteLayout.visibility = View.GONE
                     getDataFromDatabase(myUser)
                     Toast.makeText(this, "Image changed successfully", Toast.LENGTH_SHORT).show()
                 }
                 is Response.Failure -> {
                     progressBar.visibility = View.GONE
+                    whiteLayout.visibility = View.GONE
                     Toast.makeText(this, it.errorMassage, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -235,6 +244,7 @@ class UserProfileActivity : AppCompatActivity() {
                 }
             }
             progressBar.visibility = View.GONE
+            whiteLayout.visibility = View.GONE
             profileMainLayout.visibility = View.VISIBLE
             signOutBtn.visibility = View.VISIBLE
             uploadImage.isClickable = true

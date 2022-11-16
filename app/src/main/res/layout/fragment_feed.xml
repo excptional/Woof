@@ -31,13 +31,13 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progressbar_feed"
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_100sdp"
             android:layout_centerInParent="true"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
             android:scaleX="2"
             android:scaleY="2"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
             app:lottie_rawRes="@raw/loaderorange" />
 
     </RelativeLayout>

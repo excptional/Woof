@@ -26,19 +26,22 @@ class AppViewModel(application: Application) :
         petName: String?,
         phoneNo: String?,
         email: String?,
-        password: String?
+        password: String?,
+        species: String?,
+        breed: String?
     ) {
-        appRepository.normalUserRegister(name, petName, phoneNo, email, password)
+        appRepository.normalUserRegister(name, petName, phoneNo, email, password, species, breed)
     }
 
     fun sellerRegister(
         name: String?,
         tradeLicNo: String?,
+        tradeLicDoc: String?,
         phoneNo: String?,
         email: String?,
         password: String?
     ) {
-        appRepository.sellerRegister(name, tradeLicNo, phoneNo, email, password)
+        appRepository.sellerRegister(name, tradeLicNo, tradeLicDoc, phoneNo, email, password)
     }
 
     fun doctorRegister(
@@ -46,9 +49,10 @@ class AppViewModel(application: Application) :
         regNo: String?,
         phoneNo: String?,
         email: String?,
-        password: String?
+        password: String?,
+        speciality: String?
     ) {
-        appRepository.doctorRegister(name, regNo, phoneNo, email, password)
+        appRepository.doctorRegister(name, regNo, phoneNo, email, password, speciality)
     }
 
     fun logOut() {

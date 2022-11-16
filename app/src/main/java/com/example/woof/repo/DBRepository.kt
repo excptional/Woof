@@ -36,6 +36,10 @@ class DBRepository(private val application: Application) {
     val hospitalData: LiveData<MutableList<DocumentSnapshot>>
         get() = hospitalLivedata
 
+    private val tradeLicUrlLivedata = MutableLiveData<String?>()
+    val tradeLicUrl: LiveData<String?>
+        get() = tradeLicUrlLivedata
+
 
 
     fun uploadImageToStorage(imageUri: Uri, user: FirebaseUser) {
@@ -253,9 +257,61 @@ class DBRepository(private val application: Application) {
             }
     }
 
+    fun uploadTradeLicDoc(img: Uri){
+        val ref = firebaseStorage.reference.child("tradeLic/${img.lastPathSegment}")
+        ref.putFile(img).addOnSuccessListener {
+            ref.downloadUrl.addOnSuccessListener { uri ->
+                responseDBLivedata.postValue(Response.Success())
+                tradeLicUrlLivedata.postValue(uri.toString())
+            }
+                .addOnFailureListener {
+                    responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
+                }
+        }
+            .addOnFailureListener {
+                responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
+            }
+    }
+
     private fun getErrorMassage(e: Exception): String{
         val colonIndex = e.toString().indexOf(":")
         return e.toString().substring(colonIndex + 2)
+    }
+
+    fun addTrainingCenter(count: Int){
+        val postData = hashMapOf(
+            "Name" to "",
+            "Phone Number" to "",
+            "Address" to "",
+            "Website" to "",
+            "Ratings" to ""
+        )
+        firebaseDB.collection("Training Center").document("$count").set(postData)
+
+    }
+
+    fun addGroomingCenter(count: Int){
+        val postData = hashMapOf(
+            "Name" to "",
+            "Phone Number" to "",
+            "Address" to "",
+            "Website" to "",
+            "Ratings" to ""
+        )
+        firebaseDB.collection("Grooming Center").document("$count").set(postData)
+
+    }
+
+    fun addKennelsCenter(count: Int){
+        val postData = hashMapOf(
+            "Name" to "",
+            "Phone Number" to "",
+            "Address" to "",
+            "Website" to "",
+            "Ratings" to ""
+        )
+        firebaseDB.collection("Kennel And Pet Shop").document("$count").set(postData)
+
     }
 
 //    fun getLikeList(user: FirebaseUser, id: String?) {

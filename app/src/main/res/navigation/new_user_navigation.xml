@@ -49,4 +49,9 @@
         android:id="@+id/nav_contact_us"
         android:name="com.example.woof.UserActivities.NormalUser.fragments.ContactUs"
         tools:layout="@layout/fragment_contact_us" />
+
+    <fragment
+        android:id="@+id/nav_hospital_map"
+        android:name="com.example.woof.UserActivities.NormalUser.fragments.HospitalMap"
+        tools:layout="@layout/fragment_hospital_map" />
 </navigation>

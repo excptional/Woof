@@ -40,6 +40,8 @@ class AppRepository(private val application: Application) {
         phoneNo: String?,
         email: String?,
         password: String?,
+        species: String?,
+        breed: String?
     ) {
         val data = hashMapOf(
             "Name" to name,
@@ -47,7 +49,9 @@ class AppRepository(private val application: Application) {
             "Phone No" to phoneNo,
             "Image Url" to "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/user2.png?alt=media&token=6eb92a4c-a6e6-443b-9ca3-8e7d5a7cd7ef",
             "Email" to email,
-            "Usertype" to "Normal User"
+            "Usertype" to "Normal User",
+            "Pet Species" to species,
+            "Pet Breed" to breed
         )
         firebaseAuth.createUserWithEmailAndPassword(email!!, password!!)
             .addOnCompleteListener(
@@ -77,6 +81,7 @@ class AppRepository(private val application: Application) {
     fun sellerRegister(
         name: String?,
         tradeLicNo: String?,
+        tradeLicDoc: String?,
         phoneNo: String?,
         email: String?,
         password: String?,
@@ -84,6 +89,7 @@ class AppRepository(private val application: Application) {
         val data = hashMapOf(
             "Name" to name,
             "Trade License Number" to tradeLicNo,
+            "Trade License Document Url" to tradeLicDoc,
             "Phone No" to phoneNo,
             "Image Url" to "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/user2.png?alt=media&token=6eb92a4c-a6e6-443b-9ca3-8e7d5a7cd7ef",
             "Email" to email,
@@ -120,6 +126,7 @@ class AppRepository(private val application: Application) {
         phoneNo: String?,
         email: String?,
         password: String?,
+        speciality: String?
     ) {
         val data = hashMapOf(
             "Name" to name,
@@ -127,7 +134,8 @@ class AppRepository(private val application: Application) {
             "Phone No" to phoneNo,
             "Image Url" to "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/user2.png?alt=media&token=6eb92a4c-a6e6-443b-9ca3-8e7d5a7cd7ef",
             "Email" to email,
-            "Usertype" to "Doctor"
+            "Usertype" to "Doctor",
+            "Speciality" to speciality
         )
         firebaseAuth.createUserWithEmailAndPassword(email!!, password!!)
             .addOnCompleteListener(
@@ -172,7 +180,7 @@ class AppRepository(private val application: Application) {
             }
     }
 
-    private fun getErrorMassage(e: Exception): String{
+    private fun getErrorMassage(e: Exception): String {
         val colonIndex = e.toString().indexOf(":")
         return e.toString().substring(colonIndex + 2)
     }

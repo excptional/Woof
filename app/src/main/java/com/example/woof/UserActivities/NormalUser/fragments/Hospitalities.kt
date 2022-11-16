@@ -120,7 +120,10 @@ class Hospitalities : Fragment() {
         for (i in list) {
             val hospital = HospitalItem(
                 i.getString("Name"),
+                i.getString("Number"),
+                i.getString("Address"),
                 i.getString("City"),
+                i.getString("Website"),
                 i.getString("Ratings")
             )
             val doctor = DoctorItems(

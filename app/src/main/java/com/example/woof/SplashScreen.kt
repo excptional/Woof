@@ -34,6 +34,7 @@ class SplashScreen : AppCompatActivity() {
             if (user == null) {
                 Handler().postDelayed({
                     startActivity(Intent(this, AuthenticationActivity::class.java))
+                    finish()
                 }, 2000)
 
             } else {
@@ -47,6 +48,7 @@ class SplashScreen : AppCompatActivity() {
                                     NormalUserActivity::class.java
                                 )
                             )
+                            finish()
                         }
                         "Seller" -> {
                             startActivity(
@@ -55,6 +57,7 @@ class SplashScreen : AppCompatActivity() {
                                     SellerActivity::class.java
                                 )
                             )
+                            finish()
                         }
                         "Doctor" -> {
                             startActivity(
@@ -63,6 +66,7 @@ class SplashScreen : AppCompatActivity() {
                                     DoctorActivity::class.java
                                 )
                             )
+                            finish()
                         }
                         "Nothing" -> {
                             Toast.makeText(this@SplashScreen, "starting...", Toast.LENGTH_SHORT).show()

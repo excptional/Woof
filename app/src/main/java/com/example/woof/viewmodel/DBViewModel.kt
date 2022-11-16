@@ -21,6 +21,8 @@ class DBViewModel(application: Application) :
         get() = dbRepository.postData
     val hospitalData: LiveData<MutableList<DocumentSnapshot>>
         get() = dbRepository.hospitalData
+    val tradeLicUrl: LiveData<String?>
+        get() = dbRepository.tradeLicUrl
 
 
     fun uploadImageToStorage(imageUri: Uri, user: FirebaseUser) {
@@ -64,6 +66,22 @@ class DBViewModel(application: Application) :
 
     fun fetchHospitals() {
         dbRepository.fetchHospitals()
+    }
+
+    fun uploadTradeLicDoc(img: Uri){
+        dbRepository.uploadTradeLicDoc(img)
+    }
+
+    fun addGroomingCenter(count: Int){
+        dbRepository.addGroomingCenter(count)
+    }
+
+    fun addTrainingCenter(count: Int){
+        dbRepository.addTrainingCenter(count)
+    }
+
+    fun addKennels(count: Int){
+        dbRepository.addKennelsCenter(count)
     }
 
 //    fun getLikeList(user: FirebaseUser, id: String?){

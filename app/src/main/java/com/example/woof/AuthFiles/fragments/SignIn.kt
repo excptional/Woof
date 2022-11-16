@@ -115,6 +115,7 @@ class SignIn : Fragment() {
                                 Toast.LENGTH_SHORT
                             ).show()
                             signInProgressbar.visibility = View.GONE
+                            signInWhiteLayout.visibility = View.GONE
                         }
                         else -> {}
                     }

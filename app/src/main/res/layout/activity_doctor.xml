@@ -4,12 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     tools:context=".UserActivities.DoctorActivity">
 
     <TextView
+        android:id="@+id/text_doctor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/_10sdp"
         android:text="Doctor"/>
+
+    <Button
+        android:id="@+id/addBtn_doctor"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:text="Add data"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/text_doctor"/>
 
 </RelativeLayout>
