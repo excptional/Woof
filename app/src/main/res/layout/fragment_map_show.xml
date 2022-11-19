@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".UserActivities.NormalUser.fragments.HospitalMap">
+    tools:context=".UserActivities.NormalUser.fragments.MapShow">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                 app:lottie_autoPlay="true"/>
 
             <TextView
-                android:id="@+id/hospitalTitle"
+                android:id="@+id/objectTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
@@ -58,7 +58,7 @@
             android:orientation="horizontal">
 
             <RatingBar
-                android:id="@+id/hospitalRatingBar"
+                android:id="@+id/objectRatingBar"
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_10sdp"
@@ -67,7 +67,7 @@
                 android:stepSize="0.1" />
 
             <TextView
-                android:id="@+id/hospitalRatingText"
+                android:id="@+id/objectRatingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
@@ -91,7 +91,7 @@
                 android:src="@drawable/location"/>
 
             <TextView
-                android:id="@+id/hospitalAddress"
+                android:id="@+id/objectAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="2"
@@ -103,7 +103,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/hospitalWebsiteLayout"
+            android:id="@+id/objectWebsiteLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -117,7 +117,7 @@
                 android:src="@drawable/launch"/>
 
             <TextView
-                android:id="@+id/hospitalWebsite"
+                android:id="@+id/objectWebsite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="middle"
@@ -130,9 +130,9 @@
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/hospitalNumberLayout"
+            android:id="@+id/objectNumberLayout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="@dimen/_40sdp"
             app:cardBackgroundColor="#2196F3"
             app:cardCornerRadius="@dimen/_10sdp"
             android:layout_margin="@dimen/_10sdp">
@@ -147,11 +147,11 @@
                 <ImageView
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_25sdp"
-                    android:src="@drawable/half_star"
+                    android:src="@drawable/go"
                     android:layout_margin="@dimen/_5sdp" />
 
                 <TextView
-                    android:id="@+id/hospitalNumber"
+                    android:id="@+id/objectNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
@@ -162,7 +162,7 @@
                     android:layout_weight="4" />
 
                 <ImageView
-                    android:id="@+id/hospitalCallBtn"
+                    android:id="@+id/objectCallBtn"
                     android:layout_width="@dimen/_45sdp"
                     android:layout_height="match_parent"
                     android:src="@drawable/call"
@@ -172,7 +172,7 @@
                     android:background="?attr/selectableItemBackground"/>
 
                 <ImageView
-                    android:id="@+id/hospitalSMSBtn"
+                    android:id="@+id/objectSMSBtn"
                     android:layout_width="@dimen/_45sdp"
                     android:layout_height="match_parent"
                     android:src="@drawable/massage"

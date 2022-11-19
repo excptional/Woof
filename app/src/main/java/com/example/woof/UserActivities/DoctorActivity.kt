@@ -24,9 +24,7 @@ class DoctorActivity : AppCompatActivity() {
         addBtn.setOnClickListener{
             count++
             text.text = "$count"
-            dbViewModel.addGroomingCenter(count)
             dbViewModel.addKennels(count)
-            dbViewModel.addTrainingCenter(count)
         }
     }
 }

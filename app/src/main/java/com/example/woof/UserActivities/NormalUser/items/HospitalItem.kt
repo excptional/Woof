@@ -6,5 +6,5 @@ data class HospitalItem(
     val hospitalAddress: String? = null,
     val hospitalLocation: String? = null,
     val hospitalWebsite: String? = null,
-    val rating: String? = null
+    val hospitalRating: String? = null
 )

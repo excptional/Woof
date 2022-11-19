@@ -6,7 +6,7 @@
     android:gravity="center">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/itemLayout_doctor"
+        android:id="@+id/itemLayout_kennel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardBackgroundColor="@color/light_cream"
@@ -24,12 +24,12 @@
             android:padding="@dimen/_5sdp">
 
             <ImageView
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="match_parent"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_margin="@dimen/_5sdp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/smiledoctor" />
+                android:src="@drawable/kennel2" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,13 +39,13 @@
                 android:padding="@dimen/_5sdp">
 
                 <TextView
-                    android:id="@+id/name_doctor"
+                    android:id="@+id/name_kennel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="Dr. Bikash Dutta"
+                    android:text="kennel Name"
                     android:textAlignment="textEnd"
                     android:textColor="@color/material_black"
                     android:textSize="@dimen/_11sdp"
@@ -59,7 +59,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/location_doctor"
+                        android:id="@+id/location_kennel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kolkata"
@@ -83,7 +83,7 @@
                     android:orientation="horizontal">
 
                     <RatingBar
-                        android:id="@+id/ratingBar_hospital"
+                        android:id="@+id/ratingBar_kennel"
                         style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_10sdp"
@@ -92,7 +92,7 @@
                         android:stepSize="0.1" />
 
                     <TextView
-                        android:id="@+id/ratingText_hospital"
+                        android:id="@+id/ratingText_kennel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"

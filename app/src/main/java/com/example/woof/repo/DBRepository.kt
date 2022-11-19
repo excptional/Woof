@@ -36,6 +36,14 @@ class DBRepository(private val application: Application) {
     val hospitalData: LiveData<MutableList<DocumentSnapshot>>
         get() = hospitalLivedata
 
+    private val kennelLivedata = MutableLiveData<MutableList<DocumentSnapshot>>()
+    val kennelData: LiveData<MutableList<DocumentSnapshot>>
+        get() = kennelLivedata
+
+    private val petShopLivedata = MutableLiveData<MutableList<DocumentSnapshot>>()
+    val petShopData: LiveData<MutableList<DocumentSnapshot>>
+        get() = petShopLivedata
+
     private val tradeLicUrlLivedata = MutableLiveData<String?>()
     val tradeLicUrl: LiveData<String?>
         get() = tradeLicUrlLivedata
@@ -310,8 +318,39 @@ class DBRepository(private val application: Application) {
             "Website" to "",
             "Ratings" to ""
         )
-        firebaseDB.collection("Kennel And Pet Shop").document("$count").set(postData)
+        firebaseDB.collection("Kennel").document("$count").set(postData)
+        firebaseDB.collection("Pet Shop").document("$count").set(postData)
 
+    }
+
+    fun fetchKennels() {
+        firebaseDB.collection("Kennel").get()
+            .addOnSuccessListener { documents ->
+                val list = mutableListOf<DocumentSnapshot>()
+                for (document in documents) {
+                    list.add(document)
+                }
+                responseDBLivedata.postValue(Response.Success())
+                kennelLivedata.postValue(list)
+            }
+            .addOnFailureListener {
+                responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
+            }
+    }
+
+    fun fetchPetShop() {
+        firebaseDB.collection("Pet Shop").get()
+            .addOnSuccessListener { documents ->
+                val list = mutableListOf<DocumentSnapshot>()
+                for (document in documents) {
+                    list.add(document)
+                }
+                responseDBLivedata.postValue(Response.Success())
+                petShopLivedata.postValue(list)
+            }
+            .addOnFailureListener {
+                responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
+            }
     }
 
 //    fun getLikeList(user: FirebaseUser, id: String?) {

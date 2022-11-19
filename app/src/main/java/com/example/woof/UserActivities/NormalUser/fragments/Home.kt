@@ -23,8 +23,6 @@ class Home : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        val shop: LinearLayout = view.findViewById(R.id.pet_shop_home)
-
         val imageList = ArrayList<SlideModel>() // Create image list
 
 // imageList.add(SlideModel("String Url" or R.drawable)

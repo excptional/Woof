@@ -28,25 +28,25 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 
-class HospitalMap : Fragment(), OnMapReadyCallback {
+class MapShow : Fragment(), OnMapReadyCallback {
 
     companion object {
         private const val PHONE_CALL_CODE = 100
         private const val SEND_SMS_CODE = 101
     }
 
-    private lateinit var hospitalName: TextView
-    private lateinit var hospitalNumber: TextView
-    private lateinit var hospitalAddress: TextView
-    private lateinit var hospitalWebsite: TextView
+    private lateinit var objectName: TextView
+    private lateinit var objectNumber: TextView
+    private lateinit var objectAddress: TextView
+    private lateinit var objectWebsite: TextView
     private lateinit var ratingBar: RatingBar
     private lateinit var ratingText: TextView
     private lateinit var callBtn: ImageView
     private lateinit var smsBtn: ImageView
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
-    private lateinit var hospitalWebsiteLayout: LinearLayout
-    private lateinit var hospitalNumberLayout: CardView
+    private lateinit var objectWebsiteLayout: LinearLayout
+    private lateinit var objectNumberLayout: CardView
     private lateinit var name: String
     private lateinit var number: String
     private lateinit var address: String
@@ -56,28 +56,13 @@ class HospitalMap : Fragment(), OnMapReadyCallback {
     private var long: Double = 0.0
 
 
-    private val callback = OnMapReadyCallback { googleMap ->
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-    }
-
     @SuppressLint("MissingInflatedId", "ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_hospital_map, container, false)
+        val view = inflater.inflate(R.layout.fragment_map_show, container, false)
 
         name = requireArguments().getString("name")!!
         address = requireArguments().getString("address")!!
@@ -85,30 +70,30 @@ class HospitalMap : Fragment(), OnMapReadyCallback {
         website = requireArguments().getString("website")!!
         ratings = requireArguments().getString("ratings")!!
 
-        hospitalName = view.findViewById(R.id.hospitalTitle)
-        hospitalNumber = view.findViewById(R.id.hospitalNumber)
-        hospitalAddress = view.findViewById(R.id.hospitalAddress)
-        hospitalWebsite = view.findViewById(R.id.hospitalWebsite)
-        ratingBar = view.findViewById(R.id.hospitalRatingBar)
-        ratingText = view.findViewById(R.id.hospitalRatingText)
-        callBtn = view.findViewById(R.id.hospitalCallBtn)
-        smsBtn = view.findViewById(R.id.hospitalSMSBtn)
+        objectName = view.findViewById(R.id.objectTitle)
+        objectNumber = view.findViewById(R.id.objectNumber)
+        objectAddress = view.findViewById(R.id.objectAddress)
+        objectWebsite = view.findViewById(R.id.objectWebsite)
+        ratingBar = view.findViewById(R.id.objectRatingBar)
+        ratingText = view.findViewById(R.id.objectRatingText)
+        callBtn = view.findViewById(R.id.objectCallBtn)
+        smsBtn = view.findViewById(R.id.objectSMSBtn)
         mapView = view.findViewById(R.id.mapView)
-        hospitalWebsiteLayout = view.findViewById(R.id.hospitalWebsiteLayout)
-        hospitalNumberLayout = view.findViewById(R.id.hospitalNumberLayout)
+        objectWebsiteLayout = view.findViewById(R.id.objectWebsiteLayout)
+        objectNumberLayout = view.findViewById(R.id.objectNumberLayout)
 
-        if (website.isEmpty()) hospitalWebsiteLayout.visibility = View.GONE
+        if (website.isEmpty()) objectWebsiteLayout.visibility = View.GONE
 
-        if (number.isEmpty()) hospitalNumberLayout.visibility = View.GONE
+        if (number.isEmpty()) objectNumberLayout.visibility = View.GONE
 
-        hospitalName.text = name
-        hospitalAddress.text = address
-        hospitalNumber.text = number
-        hospitalWebsite.text = website
+        objectName.text = name
+        objectAddress.text = address
+        objectNumber.text = number
+        objectWebsite.text = website
         ratingText.text = ratings
         ratingBar.rating = ratings.toFloat()
 
-        val geocoder: Geocoder = Geocoder(requireContext())
+        val geocoder = Geocoder(requireContext())
         var addressList = mutableListOf<Address>()
 
         try{
@@ -140,7 +125,7 @@ class HospitalMap : Fragment(), OnMapReadyCallback {
             )
         }
 
-        hospitalNumber.setOnClickListener {
+        objectNumber.setOnClickListener {
             val myClipboard =
                 getSystemService(requireContext(), ClipboardManager::class.java) as ClipboardManager
             val clip: ClipData = ClipData.newPlainText("simple text", number)
@@ -148,7 +133,7 @@ class HospitalMap : Fragment(), OnMapReadyCallback {
             showToast("Number copied")
         }
 
-        hospitalWebsite.setOnClickListener {
+        objectWebsite.setOnClickListener {
             val builder = CustomTabsIntent.Builder()
             builder.setToolbarColor(
                 ContextCompat.getColor(

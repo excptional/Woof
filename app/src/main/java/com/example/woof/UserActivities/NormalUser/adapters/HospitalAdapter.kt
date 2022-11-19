@@ -27,19 +27,18 @@ class HospitalAdapter(
         val currentItem = hospitalItems[position]
         holder.nameHospital.text = currentItem.hospitalName
         holder.locationHospital.text = currentItem.hospitalLocation
-        holder.ratingTextHospital.text = currentItem.rating
-        holder.ratingBarHospital.rating = currentItem.rating!!.toFloat()
+        holder.ratingTextHospital.text = currentItem.hospitalRating
+        holder.ratingBarHospital.rating = currentItem.hospitalRating!!.toFloat()
 
         val bundle = Bundle()
         bundle.putString("name", currentItem.hospitalName)
         bundle.putString("number", currentItem.hospitalNumber)
         bundle.putString("address", currentItem.hospitalAddress)
         bundle.putString("website", currentItem.hospitalWebsite)
-        bundle.putString("ratings", currentItem.rating.toFloat().toString())
-//        HospitalLocation().arguments = bundle
+        bundle.putString("ratings", currentItem.hospitalRating.toFloat().toString())
 
         holder.itemLayoutHospital.setOnClickListener {
-           Navigation.findNavController(it).navigate(R.id.nav_hospital_map, bundle)
+           Navigation.findNavController(it).navigate(R.id.nav_object_map, bundle)
         }
     }
 

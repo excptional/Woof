@@ -50,7 +50,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/inputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/signUpTitle_default"
@@ -95,7 +94,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/signUpPhoneLayout_default"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:layout_marginStart="@dimen/_20sdp"
@@ -171,7 +169,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/signUpChooseLayout_default"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:layout_marginStart="@dimen/_20sdp"

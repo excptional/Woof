@@ -21,6 +21,10 @@ class DBViewModel(application: Application) :
         get() = dbRepository.postData
     val hospitalData: LiveData<MutableList<DocumentSnapshot>>
         get() = dbRepository.hospitalData
+    val kennelData: LiveData<MutableList<DocumentSnapshot>>
+        get() = dbRepository.kennelData
+    val petShopData: LiveData<MutableList<DocumentSnapshot>>
+        get() = dbRepository.petShopData
     val tradeLicUrl: LiveData<String?>
         get() = dbRepository.tradeLicUrl
 
@@ -68,6 +72,14 @@ class DBViewModel(application: Application) :
         dbRepository.fetchHospitals()
     }
 
+    fun fetchPetShop() {
+        dbRepository.fetchPetShop()
+    }
+
+    fun fetchKennels() {
+        dbRepository.fetchKennels()
+    }
+
     fun uploadTradeLicDoc(img: Uri){
         dbRepository.uploadTradeLicDoc(img)
     }
@@ -84,7 +96,4 @@ class DBViewModel(application: Application) :
         dbRepository.addKennelsCenter(count)
     }
 
-//    fun getLikeList(user: FirebaseUser, id: String?){
-//        dbRepository.getLikeList(user, id)
-//    }
 }

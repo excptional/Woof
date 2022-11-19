@@ -14,12 +14,6 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="ButtonColor">
-        <item name="colorPrimary">@color/lightest_purple</item>
-        <item name="colorPrimaryVariant">#283593</item>
-
-    </style>
-
     <style name="Theme.Woof.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

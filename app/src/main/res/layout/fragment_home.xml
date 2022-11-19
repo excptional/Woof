@@ -30,7 +30,7 @@
             android:layout_marginEnd="@dimen/_8sdp"
             android:layout_marginBottom="@dimen/_8sdp"
             app:cardBackgroundColor="@color/material_black"
-            app:cardCornerRadius="@dimen/_20sdp">
+            app:cardCornerRadius="@dimen/_10sdp">
 
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/image_slider"
@@ -63,7 +63,6 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/feed_home"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
                     android:gravity="center"
@@ -88,7 +87,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/food_home"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
                     android:gravity="center"
@@ -113,7 +111,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/grooming_home"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
                     android:gravity="center"
@@ -174,7 +171,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/hospital_home"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
                     android:gravity="center"
@@ -199,7 +195,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/medicine_home"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
                     android:gravity="center"

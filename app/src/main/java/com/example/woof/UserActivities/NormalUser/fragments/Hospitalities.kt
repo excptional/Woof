@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
 import java.util.*
 
+//06220110027639
 class Hospitalities : Fragment() {
 
     private lateinit var hospitalAdapter: HospitalAdapter
@@ -64,11 +65,13 @@ class Hospitalities : Fragment() {
         hospitalAdapter = HospitalAdapter(hospitalItemsArray)
         hospitalRecyclerView.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
         hospitalRecyclerView.setHasFixedSize(true)
+        hospitalRecyclerView.setItemViewCacheSize(20)
         hospitalRecyclerView.adapter = hospitalAdapter
 
         doctorAdapter = DoctorAdapter(doctorItemsArray)
         doctorRecyclerView.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
         doctorRecyclerView.setHasFixedSize(true)
+        doctorRecyclerView.setItemViewCacheSize(20)
         doctorRecyclerView.adapter = doctorAdapter
 
         swipeRefreshLayout.setOnRefreshListener {
