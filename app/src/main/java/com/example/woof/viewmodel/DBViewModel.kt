@@ -17,6 +17,8 @@ class DBViewModel(application: Application) :
         get() = dbRepository.userProfileData
     val dbLiveData: LiveData<Response<String>>
         get() = dbRepository.responseDB
+    val tradeLicUrl: LiveData<String?>
+        get() = dbRepository.tradeLicUrl
     val postData: LiveData<MutableList<DocumentSnapshot>>
         get() = dbRepository.postData
     val hospitalData: LiveData<MutableList<DocumentSnapshot>>
@@ -25,8 +27,17 @@ class DBViewModel(application: Application) :
         get() = dbRepository.kennelData
     val petShopData: LiveData<MutableList<DocumentSnapshot>>
         get() = dbRepository.petShopData
-    val tradeLicUrl: LiveData<String?>
-        get() = dbRepository.tradeLicUrl
+    val trainingCenterData: LiveData<MutableList<DocumentSnapshot>>
+        get() = dbRepository.trainingCenterData
+    val groomingCenterData: LiveData<MutableList<DocumentSnapshot>>
+        get() = dbRepository.groomingCenterData
+    val foodAndAccData: LiveData<MutableList<DocumentSnapshot>>
+        get() = dbRepository.foodAndAccData
+    val bookingsData: LiveData<MutableList<DocumentSnapshot>>
+        get() = dbRepository.bookingsData
+    val feedbackData: LiveData<String?>
+        get() = dbRepository.feedbackData
+
 
 
     fun uploadImageToStorage(imageUri: Uri, user: FirebaseUser) {
@@ -80,8 +91,24 @@ class DBViewModel(application: Application) :
         dbRepository.fetchKennels()
     }
 
+    fun fetchTrainingCenter() {
+        dbRepository.fetchTrainingCenter()
+    }
+
+    fun fetchGroomingCenter() {
+        dbRepository.fetchGroomingCenter()
+    }
+
+    fun fetchFoodAndAcc() {
+        dbRepository.fetchFoodAndAcc()
+    }
+
     fun uploadTradeLicDoc(img: Uri){
         dbRepository.uploadTradeLicDoc(img)
+    }
+
+    fun getBookingRequest() {
+        dbRepository.getBookingRequest()
     }
 
     fun addGroomingCenter(count: Int){
@@ -94,6 +121,19 @@ class DBViewModel(application: Application) :
 
     fun addKennels(count: Int){
         dbRepository.addKennelsCenter(count)
+    }
+
+    fun addAccessories(count: Int){
+        dbRepository.addAccessories(count)
+    }
+
+    fun sendFeedback(email: String, subject: String, massage: String){
+        dbRepository.sendFeedback(email, subject, massage)
+    }
+
+    fun addOrder(userName: String, userNumber: String, userAddress: String,
+                 userUID: String, productName: String, payableAmount: String, quantity: Int){
+        dbRepository.addOrder(userName, userNumber, userAddress, userUID, productName, payableAmount, quantity)
     }
 
 }

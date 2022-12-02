@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/itemLayout_bookings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/light_cream"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="@dimen/_5sdp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:weightSum="2"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ownerImage_bookings"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:scaleType="centerCrop"
+                    android:layout_weight="1"
+                    android:layout_gravity="top"
+                    android:src="@drawable/user2" />
+
+                <TextView
+                    android:id="@+id/ownerName_bookings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bikash Dutta"
+                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textColor="@color/material_black"/>
+
+                <LinearLayout
+                    android:id="@+id/statusLayout_bookings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_5sdp"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:id="@+id/acceptBTN_bookings"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:background="@null"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:src="@drawable/done"/>
+
+                    <ImageButton
+                        android:id="@+id/rejectBTN_bookings"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:background="@null"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/cancel"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="Pet species"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/material_black"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/species_bookings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="Dog"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/material_black"
+                    android:textSize="@dimen/_11sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:ellipsize="end"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:maxLines="2"
+                    android:text="Issue"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/material_black"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/issue_bookings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:ellipsize="end"
+                    android:text="My pet has fever"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/material_black"
+                    android:textSize="@dimen/_11sdp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:ellipsize="end"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:maxLines="2"
+                    android:text="Date"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/material_black"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/date_bookings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:ellipsize="end"
+                    android:text="17 th Dec, 2022"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/material_black"
+                    android:textSize="@dimen/_11sdp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/location_bookings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Timings : 11 am to 5 pm"
+                        android:textColor="#1976D2"
+                        android:textSize="@dimen/_11sdp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:src="@drawable/time" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="Status"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/material_black"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/status_bookings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:ellipsize="end"
+                    android:text="Pending"
+                    android:textStyle="bold"
+                    android:textAlignment="textEnd"
+                    android:textColor="#58B804"
+                    android:textSize="@dimen/_11sdp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
@@ -53,6 +54,14 @@ class UserProfileActivity : AppCompatActivity() {
         get() = findViewById(R.id.regNoText)
     private val tradeNo: TextView
         get() = findViewById(R.id.tradeLicenseText)
+    private val petSpecies: TextView
+        get() = findViewById(R.id.petSpeciesText)
+    private val petBreed: TextView
+        get() = findViewById(R.id.petBreedText)
+    private val petSpeciesLayout: LinearLayout
+        get() = findViewById(R.id.petSpeciesLayout)
+    private val petBreedLayout: LinearLayout
+        get() = findViewById(R.id.petBreedLayout)
     private val userNameLayout: LinearLayout
         get() = findViewById(R.id.nameEditLayout)
     private val petNameLayout: LinearLayout
@@ -146,9 +155,9 @@ class UserProfileActivity : AppCompatActivity() {
         val dialog = Dialog(this@UserProfileActivity)
         dialog.setCanceledOnTouchOutside(false)
         dialog.setCancelable(false)
-
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.dialog_edit_data)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         val dialogEditText: TextInputEditText = dialog.findViewById(R.id.editText_dialog)
         val dialogTitle: TextView = dialog.findViewById(R.id.dialog_title)
         val dialogDoneBtn: TextView = dialog.findViewById(R.id.dialog_done_btn)
@@ -232,7 +241,11 @@ class UserProfileActivity : AppCompatActivity() {
             when (userType) {
                 "Normal User" -> {
                     petNameLayout.visibility = View.VISIBLE
+                    petSpeciesLayout.visibility = View.VISIBLE
+                    petBreedLayout.visibility = View.VISIBLE
                     petName.text = dataList[4]
+                    petSpecies.text = dataList[5]
+                    petBreed.text = dataList[6]
                 }
                 "Seller" -> {
                     tradeNoLayout.visibility = View.VISIBLE
@@ -240,7 +253,7 @@ class UserProfileActivity : AppCompatActivity() {
                 }
                 "Doctor" -> {
                     regNoLayout.visibility = View.VISIBLE
-                    regNo.text = dataList[4]
+                    regNo.text = dataList[5]
                 }
             }
             progressBar.visibility = View.GONE

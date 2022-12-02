@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.woof.AuthFiles.AuthenticationActivity
 import com.example.woof.UserActivities.DoctorActivity
-import com.example.woof.UserActivities.NormalUser.NormalUserActivity
+import com.example.woof.UserActivities.NormalUserActivity
 import com.example.woof.UserActivities.SellerActivity
 import com.example.woof.viewmodel.AppViewModel
 

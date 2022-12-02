@@ -41,7 +41,6 @@ class SignUpSeller : Fragment() {
     private lateinit var signUpProgressbarSeller: LottieAnimationView
     private lateinit var prevBtnSeller: CardView
     private lateinit var signUpBtnSeller: CardView
-    private val emailPattern by lazy { "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+" }
     private var appViewModel: AppViewModel? = null
     private var dbViewModel: DBViewModel? = null
     private var docUrl: String? = null
@@ -93,7 +92,7 @@ class SignUpSeller : Fragment() {
                 signUpProgressbarSeller.visibility = View.VISIBLE
                 dbViewModel!!.uploadTradeLicDoc(uri)
                 getDocUrl()
-                signUpUploadDocumentTextSeller.text = uri.lastPathSegment
+                signUpUploadDocumentTextSeller.text = "trade_license.jpg"
                 signUpClearDocumentSeller.visibility = View.VISIBLE
             } else {
                 Toast.makeText(requireContext(), "No image is uploaded", Toast.LENGTH_SHORT).show()

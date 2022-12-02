@@ -5,67 +5,76 @@
     android:id="@+id/swipeRefreshLayout_hospital"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserActivities.NormalUser.fragments.Feed">
+    tools:context=".UserActivities.fragments.Hospitalities">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchbar_hospital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@null"
+            android:queryHint="Search"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/rounded_corner_gray"
+            android:layout_margin="@dimen/_10sdp"/>
+
+        <LinearLayout
+            android:id="@+id/topLayout_hospital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/searchbar_hospital"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/_5sdp"
+            android:visibility="visible">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_gravity="bottom"
+                android:rotationY="180"
+                android:scaleX="2"
+                android:scaleY="2"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/catseating" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="@dimen/_180sdp"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_gravity="center"
+                android:scaleX="1.4"
+                android:scaleY="1.4"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/medicalstuffs" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_gravity="bottom"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/dogsitting" />
+
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/mainLayout_hospital"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_50sdp"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchbar_hospital"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:iconifiedByDefault="false"
-                android:queryBackground="@null"
-                android:queryHint="Search"
-                android:background="@drawable/rounded_corner_gray"
-                android:layout_margin="@dimen/_10sdp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:layout_margin="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_5sdp"
-                android:visibility="visible"
-                android:orientation="horizontal">
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
-                    android:scaleY="2"
-                    android:scaleX="2"
-                    app:lottie_rawRes="@raw/catseating"
-                    android:rotationY="180"
-                    app:lottie_autoPlay="true"
-                    android:layout_gravity="bottom"
-                    app:lottie_loop="true"/>
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_100sdp"
-                    android:scaleY="1.4"
-                    android:scaleX="1.4"
-                    app:lottie_rawRes="@raw/medicalstuffs"
-                    app:lottie_autoPlay="true"
-                    android:layout_gravity="center"
-                    app:lottie_loop="true"/>
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
-                    app:lottie_rawRes="@raw/dogsitting"
-                    app:lottie_autoPlay="true"
-                    android:layout_gravity="bottom"
-                    app:lottie_loop="true"/>
-
-            </LinearLayout>
 
             <com.airbnb.lottie.LottieAnimationView
                 android:layout_width="@dimen/_270sdp"
@@ -80,12 +89,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:text="Hospitals and clinics"
                 android:textColor="@color/material_black"
-                android:textSize="@dimen/_12sdp"
+                android:layout_gravity="start"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -101,12 +110,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_2sdp"
-                android:text="Private Doctors"
+                android:text="Personal doctors"
                 android:textColor="@color/material_black"
-                android:textSize="@dimen/_12sdp"
+                android:layout_gravity="start"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView

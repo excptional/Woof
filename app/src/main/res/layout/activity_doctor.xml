@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer_layout_doctor"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="#F2F5F6"
+    tools:openDrawer="start"
     tools:context=".UserActivities.DoctorActivity">
 
-    <TextView
-        android:id="@+id/text_doctor"
+    <include
+        android:id="@+id/app_bar_doctor"
+        layout="@layout/app_bar_doctor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view_doctor"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_margin="@dimen/_10sdp"
-        android:text="Doctor"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:backgroundTint="@color/cream"
+        app:headerLayout="@layout/nav_header_doctor"
+        app:menu="@menu/activity_doctor_drawer" />
 
-    <Button
-        android:id="@+id/addBtn_doctor"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:text="Add data"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/text_doctor"/>
-
-</RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout >
