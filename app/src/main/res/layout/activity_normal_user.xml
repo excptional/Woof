@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
-    android:id="@+id/drawer_layout"
+    android:id="@+id/drawer_layout_normal_user"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +9,7 @@
     android:fitsSystemWindows="true"
     android:background="#F2F5F6"
     tools:openDrawer="start"
-    tools:context=".UserActivities.NormalUser.NormalUserActivity">
+    tools:context=".UserActivities.NormalUserActivity">
 
     <include
         android:id="@+id/app_bar_normal_user"
@@ -19,13 +19,13 @@
 
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_View"
+        android:id="@+id/nav_view_normal_user"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         android:backgroundTint="@color/cream"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        app:headerLayout="@layout/nav_header_normal_user"
+        app:menu="@menu/activity_normal_user_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout >

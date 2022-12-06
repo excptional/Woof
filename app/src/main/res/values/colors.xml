@@ -11,5 +11,5 @@
     <color name="light_fade_orange">#A9805D</color>
     <color name="fade_cream">#F2E9C2</color>
     <color name="material_black">#504D4D</color>
-    <color name="bluish_gray">#899398</color>
+    <color name="background">#dddddd</color>
 </resources>

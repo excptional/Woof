@@ -37,6 +37,7 @@ class SignUpNormalUser : Fragment(), AdapterView.OnItemSelectedListener {
         "Rat",
         "Others"
     )
+
     private var dogBreed = arrayListOf(
         "Select breed",
         "Labrador Retriever",

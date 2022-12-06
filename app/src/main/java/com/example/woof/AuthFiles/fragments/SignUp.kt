@@ -28,8 +28,6 @@ class SignUp : Fragment(), AdapterView.OnItemSelectedListener {
     private var userType = arrayOf("Select your usertype", "Normal User", "Seller", "Doctor")
     private lateinit var signUpEmail: TextInputEditText
     private lateinit var signUpName: TextInputEditText
-    private lateinit var signUpTradeLicenseNoLayout: LinearLayout
-    private lateinit var signUpRegistrationNoLayout: LinearLayout
     private lateinit var nextBtn: CardView
     private lateinit var signUpProgressbar: LottieAnimationView
     private lateinit var signInText: TextView

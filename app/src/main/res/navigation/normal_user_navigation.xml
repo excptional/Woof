@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_normal_user"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.woof.UserActivities.fragments.Home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_feed"
+        android:name="com.example.woof.UserActivities.fragments.Feed"
+        tools:layout="@layout/fragment_feed" />
+
+    <fragment
+        android:id="@+id/nav_food_and_accessories"
+        android:name="com.example.woof.UserActivities.fragments.Accessories"
+        tools:layout="@layout/fragment_accessories" />
+
+    <fragment
+        android:id="@+id/nav_training_and_grooming"
+        android:name="com.example.woof.UserActivities.fragments.TrainingAndGrooming"
+        tools:layout="@layout/fragment_training_and_grooming" />
+
+    <fragment
+        android:id="@+id/nav_pet_shop_and_kennel"
+        android:name="com.example.woof.UserActivities.fragments.Shop"
+        tools:layout="@layout/fragment_training_and_grooming" />
+
+    <fragment
+        android:id="@+id/nav_hospitals_and_clinics"
+        android:name="com.example.woof.UserActivities.fragments.Hospitalities"
+        tools:layout="@layout/fragment_hospitalities" />
+
+    <fragment
+        android:id="@+id/nav_medicines"
+        android:name="com.example.woof.UserActivities.fragments.Medicine"
+        tools:layout="@layout/fragment_medicine" />
+
+    <fragment
+        android:id="@+id/nav_about_us"
+        android:name="com.example.woof.UserActivities.fragments.AboutUs"
+        tools:layout="@layout/fragment_about_us" />
+
+    <fragment
+        android:id="@+id/nav_contact_us"
+        android:name="com.example.woof.UserActivities.fragments.ContactUs"
+        tools:layout="@layout/fragment_contact_us" />
+
+    <fragment
+        android:id="@+id/nav_object_map"
+        android:name="com.example.woof.UserActivities.fragments.MapShow"
+        tools:layout="@layout/fragment_map_show" />
+
+    <fragment
+        android:id="@+id/nav_feed_content_show"
+        android:name="com.example.woof.UserActivities.fragments.FeedContentShow"
+        tools:layout="@layout/fragment_feed_content_show" />
+
+    <fragment
+        android:id="@+id/nav_order_place"
+        android:name="com.example.woof.UserActivities.fragments.OrderPlace"
+        tools:layout="@layout/fragment_order_place" />
+
+    <fragment
+        android:id="@+id/nav_book_doctor"
+        android:name="com.example.woof.UserActivities.fragments.BookDoctor"
+        tools:layout="@layout/fragment_book_doctor" />
+
+    <fragment
+        android:id="@+id/nav_medicines_order"
+        android:name="com.example.woof.UserActivities.fragments.MedicineOrder"
+        tools:layout="@layout/fragment_medicine_order" />
+
+</navigation>
