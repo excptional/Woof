@@ -54,6 +54,7 @@ class MapShow : Fragment(), OnMapReadyCallback {
     private lateinit var ratings: String
     private var lat: Double = 0.0
     private var long: Double = 0.0
+    private lateinit var msg: String
 
 
     @SuppressLint("MissingInflatedId", "ResourceAsColor")
@@ -69,6 +70,8 @@ class MapShow : Fragment(), OnMapReadyCallback {
         number = requireArguments().getString("number")!!
         website = requireArguments().getString("website")!!
         ratings = requireArguments().getString("ratings")!!
+
+        msg = name
 
         objectName = view.findViewById(R.id.objectTitle)
         objectNumber = view.findViewById(R.id.objectNumber)
@@ -157,7 +160,7 @@ class MapShow : Fragment(), OnMapReadyCallback {
         googleMap.addMarker(
             MarkerOptions()
                 .position(location)
-                .title("Marker")
+                .title(msg)
         )
         val pos = LatLng(lat, long)
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 15.0f))

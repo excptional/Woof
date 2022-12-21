@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,8 +33,7 @@ class TrainingAndGrooming : Fragment() {
     private var dbViewModel: DBViewModel? = null
     private var appViewModel: AppViewModel? = null
     private lateinit var progressbarTrainingAndGroomingCent: LottieAnimationView
-    private lateinit var mainLayoutTrainingAndGroomingCent: LinearLayout
-
+    private lateinit var contentLayoutTrainingAndGrooming: RelativeLayout
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -48,10 +48,10 @@ class TrainingAndGrooming : Fragment() {
             view.findViewById(R.id.swipeRefreshLayout_trainingAndGroomingCent)
         val recyclerViewTrainingCent: RecyclerView = view.findViewById(R.id.recyclerView_trainingCent)
         val recyclerViewGroomingCent: RecyclerView = view.findViewById(R.id.recyclerView_groomingCent)
-        mainLayoutTrainingAndGroomingCent = view.findViewById(R.id.mainLayout_trainingAndGroomingLayout)
         progressbarTrainingAndGroomingCent = view.findViewById(R.id.progressbar_trainingAndGroomingCent)
+        contentLayoutTrainingAndGrooming = view.findViewById(R.id.mainContent_trainingAndGrooming)
         progressbarTrainingAndGroomingCent.visibility = View.VISIBLE
-        mainLayoutTrainingAndGroomingCent.visibility = View.GONE
+        contentLayoutTrainingAndGrooming.visibility = View.GONE
 
         trainingCentAdapter = TrainingCentAdapter(trainingCentItemsArray)
         recyclerViewTrainingCent.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
@@ -67,7 +67,7 @@ class TrainingAndGrooming : Fragment() {
 
         swipeRefreshLayout.setOnRefreshListener {
             progressbarTrainingAndGroomingCent.visibility = View.VISIBLE
-            mainLayoutTrainingAndGroomingCent.visibility = View.GONE
+            contentLayoutTrainingAndGrooming.visibility = View.GONE
             dbViewModel!!.fetchGroomingCenter()
             dbViewModel!!.fetchTrainingCenter()
             dbViewModel!!.trainingCenterData.observe(viewLifecycleOwner) {
@@ -95,7 +95,7 @@ class TrainingAndGrooming : Fragment() {
                 }
                 is Response.Failure -> {
                     Toast.makeText(requireActivity(), it.errorMassage, Toast.LENGTH_SHORT).show()
-                    mainLayoutTrainingAndGroomingCent.visibility = View.VISIBLE
+                    contentLayoutTrainingAndGrooming.visibility = View.VISIBLE
                     progressbarTrainingAndGroomingCent.visibility = View.GONE
                 }
             }
@@ -119,7 +119,7 @@ class TrainingAndGrooming : Fragment() {
         }
         trainingCentAdapter.updateTrainingCents(trainingCentItemsArray)
         progressbarTrainingAndGroomingCent.visibility = View.GONE
-        mainLayoutTrainingAndGroomingCent.visibility = View.VISIBLE
+        contentLayoutTrainingAndGrooming.visibility = View.VISIBLE
     }
 
     private fun fetchPetGroomingCentData(list: MutableList<DocumentSnapshot>) {
@@ -137,7 +137,7 @@ class TrainingAndGrooming : Fragment() {
         }
         groomingCentAdapter.updateGroomingCents(groomingCentItemsArray)
         progressbarTrainingAndGroomingCent.visibility = View.GONE
-        mainLayoutTrainingAndGroomingCent.visibility = View.VISIBLE
+        contentLayoutTrainingAndGrooming.visibility = View.VISIBLE
     }
 
 }

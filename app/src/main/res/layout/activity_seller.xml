@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer_layout_seller"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:fitsSystemWindows="true"
+    android:background="#F2F5F6"
+    tools:openDrawer="start"
     tools:context=".UserActivities.SellerActivity">
-    
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Seller"/>
 
-</RelativeLayout>
+    <include
+        android:id="@+id/app_bar_seller"
+        layout="@layout/app_bar_seller"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view_seller"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:backgroundTint="@color/cream"
+        app:headerLayout="@layout/nav_header_seller"
+        app:menu="@menu/activity_seller_drawer" />
+
+</androidx.drawerlayout.widget.DrawerLayout >

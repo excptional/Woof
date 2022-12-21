@@ -12,4 +12,6 @@
     <color name="fade_cream">#F2E9C2</color>
     <color name="material_black">#504D4D</color>
     <color name="background">#dddddd</color>
+    <color name="green">#6EC50A</color>
+    <color name="red">#F3050C</color>
 </resources>

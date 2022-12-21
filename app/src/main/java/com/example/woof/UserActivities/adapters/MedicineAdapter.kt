@@ -40,6 +40,7 @@ class MedicineAdapter(
         bundle.putString("price", currentItem.medicinePrice)
         bundle.putString("description", currentItem.medicineDescription)
         bundle.putString("rating", currentItem.medicineRating)
+        bundle.putString("sellerId", currentItem.sellerID)
 
         holder.itemLayoutMedicine.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.nav_medicines_order, bundle)

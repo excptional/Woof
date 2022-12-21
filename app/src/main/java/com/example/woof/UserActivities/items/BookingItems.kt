@@ -7,5 +7,6 @@ data class BookingItems(
     val issue: String? = null,
     val date: String? = null,
     val timing: String? = null,
-    val status: String? = null
+    val status: String? = null,
+    val id: String? = null
 )

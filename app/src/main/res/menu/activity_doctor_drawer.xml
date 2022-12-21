@@ -1,39 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view"
-    tools:ignore="MissingDefaultResource">
+    tools:ignore="MissingDefaultResource"
+    tools:showIn="navigation_view">
 
-    <item android:title="General">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/nav_home"
-                    android:icon="@drawable/home"
-                    android:title="@string/menu_home" />
-                <item
-                    android:id="@+id/nav_feed"
-                    android:icon="@drawable/globe_black"
-                    android:title="Feed" />
-                <item
-                    android:id="@+id/nav_food_and_accessories"
-                    android:icon="@drawable/food_and_accessories"
-                    android:title="Food And Accessories" />
-                <item
-                    android:id="@+id/nav_training_and_grooming"
-                    android:icon="@drawable/grooming"
-                    android:title="Training And Grooming" />
-                <item
-                    android:id="@+id/nav_pet_shop_and_kennel"
-                    android:icon="@drawable/pet_shop"
-                    android:title="Pet Shops And Kennels" />
-            </group>
-        </menu>
-    </item>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home_doctor"
+            android:icon="@drawable/home"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_bookings"
+            android:icon="@drawable/appointment_icon"
+            android:title="Appointments" />
+        <item
+            android:id="@+id/nav_feed"
+            android:icon="@drawable/globe_black"
+            android:title="Feed" />
+        <item
+            android:id="@+id/nav_food_and_accessories"
+            android:icon="@drawable/food_and_accessories"
+            android:title="Food And Accessories" />
+        <item
+            android:id="@+id/nav_training_and_grooming"
+            android:icon="@drawable/grooming"
+            android:title="Training And Grooming" />
+        <item
+            android:id="@+id/nav_pet_shop_and_kennel"
+            android:icon="@drawable/pet_shop"
+            android:title="Pet Shops And Kennels" />
+        <item
+            android:id="@+id/nav_medicines"
+            android:icon="@drawable/medicine"
+            android:title="Medicines" />
+    </group>
+
 
     <item android:title="Connect with us">
         <menu>
-            <group android:checkableBehavior="single"
+            <group
+                android:checkableBehavior="single"
                 android:orderInCategory="@integer/material_motion_duration_long_2">
 
                 <item

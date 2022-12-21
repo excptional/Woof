@@ -4,5 +4,6 @@ data class AccItems(
     val productName: String? = null,
     val productImageUrl: String? = null,
     val productPrice: String? = null,
-    val productRating: String? = null
+    val productRating: String? = null,
+    val sellerID: String? = null
 )

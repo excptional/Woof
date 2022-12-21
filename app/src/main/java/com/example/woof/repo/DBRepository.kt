@@ -14,8 +14,6 @@ import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-@Suppress("UNUSED_CHANGED_VALUE")
 class DBRepository(private val application: Application) {
 
     private val firebaseStorage = FirebaseStorage.getInstance()
@@ -69,6 +67,10 @@ class DBRepository(private val application: Application) {
     val doctorData: LiveData<MutableList<DocumentSnapshot>>
         get() = doctorLivedata
 
+    private val orderLivedata = MutableLiveData<MutableList<DocumentSnapshot>>()
+    val orderData: LiveData<MutableList<DocumentSnapshot>>
+        get() = orderLivedata
+
     private val tradeLicUrlLivedata = MutableLiveData<String?>()
     val tradeLicUrl: LiveData<String?>
         get() = tradeLicUrlLivedata
@@ -76,7 +78,6 @@ class DBRepository(private val application: Application) {
     private val feedbackResultLiveData = MutableLiveData<String?>()
     val feedbackData: LiveData<String?>
         get() = feedbackResultLiveData
-
 
     fun uploadImageToStorage(imageUri: Uri, user: FirebaseUser) {
         val ref = firebaseStorage.reference.child("images/${user.uid}/${imageUri.lastPathSegment}")
@@ -335,64 +336,92 @@ class DBRepository(private val application: Application) {
         return e.toString().substring(colonIndex + 2)
     }
 
-    fun addTrainingCenter(count: Int) {
-        val postData = hashMapOf(
-            "Name" to "",
-            "Phone Number" to "",
-            "Address" to "",
-            "Website" to "",
-            "Ratings" to ""
+    fun addMedicines(uid: String, productName: String, productImage: Uri, productPrice: String, description: String) {
+        val date = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
+        val doc = firebaseStorage.reference.child("medicines/${productImage.lastPathSegment}")
+        doc.putFile(productImage).addOnSuccessListener {
+            doc.downloadUrl.addOnSuccessListener {
+                val data = hashMapOf(
+                    "Name" to productName,
+                    "Image Url" to it.toString(),
+                    "Price" to productPrice,
+                    "Ratings" to "3.9",
+                    "Seller ID" to uid,
+                    "Description" to description
+                )
+                firebaseDB.collection("Medicines").document(date).set(data)
+            }
+        }
+    }
+
+    fun addGroomingCenter(name: String, number: String, address: String, city: String, website: String?) {
+        val date = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
+        val data = hashMapOf(
+            "Name" to name,
+            "Phone Number" to number,
+            "Address" to address,
+            "City" to city,
+            "Website" to website,
+            "Ratings" to "3.7"
         )
-        firebaseDB.collection("Training Center").document("$count").set(postData)
+        firebaseDB.collection("Grooming Center").document("$name$date").set(data)
 
     }
 
-    fun addMedicines(count: Int) {
-        val postData = hashMapOf(
-            "Name" to "",
-            "Image Url" to "",
-            "Description" to "",
-            "Price" to "",
-            "Ratings" to ""
+    fun addTrainingCenter(name: String, number: String, address: String, city: String, website: String?) {
+        val date = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
+        val data = hashMapOf(
+            "Name" to name,
+            "Phone Number" to number,
+            "Address" to address,
+            "City" to city,
+            "Website" to website,
+            "Ratings" to "3.7"
         )
-        firebaseDB.collection("Medicines").document("$count").set(postData)
-
+        firebaseDB.collection("Training Center").document("$name$date").set(data)
     }
 
-    fun addGroomingCenter(count: Int) {
-        val postData = hashMapOf(
-            "Name" to "",
-            "Phone Number" to "",
-            "Address" to "",
-            "Website" to "",
-            "Ratings" to ""
+    fun addKennels(name: String, number: String, address: String, city: String, website: String?) {
+        val date = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
+        val data = hashMapOf(
+            "Name" to name,
+            "Phone Number" to number,
+            "Address" to address,
+            "City" to city,
+            "Website" to website,
+            "Ratings" to "3.7"
         )
-        firebaseDB.collection("Grooming Center").document("$count").set(postData)
-
+        firebaseDB.collection("Kennel").document("$name$date").set(data)
     }
 
-    fun addKennelsCenter(count: Int) {
-        val postData = hashMapOf(
-            "Name" to "",
-            "Phone Number" to "",
-            "Address" to "",
-            "Website" to "",
-            "Ratings" to ""
+    fun addPetShops(name: String, number: String, address: String, city: String, website: String?) {
+        val date = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
+        val data = hashMapOf(
+            "Name" to name,
+            "Phone Number" to number,
+            "Address" to address,
+            "City" to city,
+            "Website" to website,
+            "Ratings" to "3.7"
         )
-        firebaseDB.collection("Kennel").document("$count").set(postData)
-        firebaseDB.collection("Pet Shop").document("$count").set(postData)
-
+        firebaseDB.collection("Pet Shop").document("$name$date").set(data)
     }
 
-    fun addAccessories(count: Int) {
-        val postData = hashMapOf(
-            "Product Name" to "",
-            "Product Image" to "",
-            "Product Price" to "",
-            "Product Rating" to "",
-        )
-        firebaseDB.collection("Food And Accessories").document("$count").set(postData)
-
+    fun addAccessories(uid: String, productName: String, productImage: Uri, productPrice: String) {
+        val date = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
+        val doc = firebaseStorage.reference.child("food and accessories/${productImage.lastPathSegment}")
+        doc.putFile(productImage).addOnSuccessListener {
+            doc.downloadUrl.addOnSuccessListener {
+                val data = hashMapOf(
+                    "Product Name" to productName,
+                    "Product Image" to it.toString(),
+                    "Product Price" to productPrice,
+                    "Product Rating" to "3.9",
+                    "Seller ID" to uid
+                )
+                firebaseDB.collection("Food And Accessories").document(date).set(data)
+            }
+        }
     }
 
     fun fetchKennels() {
@@ -455,19 +484,27 @@ class DBRepository(private val application: Application) {
             }
     }
 
-    fun addOrder(userName: String, userNumber: String, userAddress: String,
-                 userUID: String, productName: String, payableAmount: String, quantity: Int ){
-
+    fun addOrder(
+        sellerID: String, userName: String, userNumber: String, userAddress: String,
+        userUID: String, productName: String, productImageUrl: String, payableAmount: String, quantity: Int
+    ) {
+        val bookingID = UUID.randomUUID()
+        var orderID = "${bookingID.leastSignificantBits}${bookingID.mostSignificantBits}"
+        orderID = orderID.replace("-", "")
         val date = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
 
         val data = mapOf(
-            "user Name" to userName,
+            "Order ID" to orderID,
+            "User Name" to userName,
             "User UID" to userUID,
             "User Number" to userNumber,
             "User Address" to userAddress,
             "Quantity" to quantity,
             "Product Name" to productName,
-            "Payable Amount" to payableAmount
+            "Payable Amount" to payableAmount,
+            "Product Image Url" to productImageUrl,
+            "Delivery Date" to "NA",
+            "Seller ID" to sellerID
         )
 
         firebaseDB.collection("Orders").document("order_$date").set(data)
@@ -477,7 +514,6 @@ class DBRepository(private val application: Application) {
             .addOnFailureListener {
                 responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
             }
-
     }
 
     fun fetchFoodAndAcc() {
@@ -510,7 +546,7 @@ class DBRepository(private val application: Application) {
             }
     }
 
-    fun sendFeedback(email: String, subject: String, massage: String){
+    fun sendFeedback(email: String, subject: String, massage: String) {
         val date = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
         val data = mapOf(
             "Email" to email,
@@ -518,7 +554,7 @@ class DBRepository(private val application: Application) {
             "Massage" to massage,
             "Date" to date
         )
-        firebaseDB.collection("Feedback").document(date).set(data).addOnSuccessListener{
+        firebaseDB.collection("Feedback").document(date).set(data).addOnSuccessListener {
             feedbackResultLiveData.postValue("Feedback send")
         }
             .addOnFailureListener {
@@ -537,12 +573,12 @@ class DBRepository(private val application: Application) {
                 doctorLivedata.postValue(list)
             }
             .addOnFailureListener {
-                responseDBLivedata.postValue(Response.Failure(it.toString()))
+                responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
             }
     }
 
-    fun getBookingRequest(){
-        firebaseDB.collection("Bookings").get()
+    fun getBookingRequest() {
+        firebaseDB.collection("Doctor Bookings").get()
             .addOnSuccessListener { documents ->
                 val list = mutableListOf<DocumentSnapshot>()
                 for (document in documents) {
@@ -552,32 +588,68 @@ class DBRepository(private val application: Application) {
                 bookingsLivedata.postValue(list)
             }
             .addOnFailureListener {
-                responseDBLivedata.postValue(Response.Failure(it.toString()))
+                responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
             }
     }
 
-    fun bookDoctor(name: String, imageUrl: String, uid: String, date: String, timings: String, species: String, issue: String) {
+    fun updateStatus(id: String, status: String) {
+        val doc = firebaseDB.collection("Doctor Bookings").document(id)
+        doc.get().addOnSuccessListener {
+            doc.update("Status", status)
+        }
+    }
+
+    fun bookDoctor(
+        userName: String,
+        userImageUrl: String,
+        userUid: String,
+        docName: String,
+        docImageUrl: String,
+        docUid: String,
+        date: String,
+        time: String,
+        docSpeciality: String,
+        species: String,
+        issue: String
+    ) {
+        val date2 = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
+        val bookingID = UUID.randomUUID()
+        val bId = "${bookingID.leastSignificantBits}${bookingID.mostSignificantBits}"
+        val uID = bId.replace("-", "")
         val data = mapOf(
-            "User Name" to name,
-            "User Image Url" to imageUrl,
-            "User uid" to uid,
-            "Timings" to timings,
+            "Booking ID" to uID,
+            "User Name" to userName,
+            "User Image Url" to userImageUrl,
+            "User Uid" to userUid,
+            "Doctor UID" to docUid,
+            "Doctor Name" to docName,
+            "Doctor Image Url" to docImageUrl,
+            "Doctor Speciality" to docSpeciality,
+            "Timings" to time,
             "Date" to date,
             "Species" to species,
             "Issue" to issue,
-            "Statue" to "Pending"
+            "Status" to "Pending",
+            "ID" to date2
         )
-        val date2 = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
         firebaseDB.collection("Doctor Bookings").document(date2).set(data)
+        firebaseDB.collection("My Appointments").document("ApCh5GTcw84qeUN9pCAS").collection(userUid).document(date2)
+            .set(data)
     }
 
-//    fun getLikeList(user: FirebaseUser, id: String?) {
-//        val doc = firebaseDB.collection("Post").document(id!!)
-//        doc.get()
-//            .addOnSuccessListener {
-//                val likeList = it.getString("List Of Reactors")
-//                if (likeList!!.contains(user.uid)) isLikeLiveData.postValue("true")
-//                else isLikeLiveData.postValue("false")
-//            }
-//    }
+    fun fetchOrder(){
+        firebaseDB.collection("Orders").get()
+            .addOnSuccessListener { documents ->
+                val list = mutableListOf<DocumentSnapshot>()
+                for (document in documents) {
+                    list.add(document)
+                }
+                responseDBLivedata.postValue(Response.Success())
+                orderLivedata.postValue(list)
+            }
+            .addOnFailureListener {
+                responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
+            }
+    }
+
 }

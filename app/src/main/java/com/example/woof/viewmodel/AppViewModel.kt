@@ -45,12 +45,12 @@ class AppViewModel(application: Application) :
     }
 
     fun doctorRegister(
-        name: String?,
-        regNo: String?,
-        phoneNo: String?,
-        email: String?,
-        password: String?,
-        speciality: String?
+        name: String,
+        regNo: String,
+        phoneNo: String,
+        email: String,
+        password: String,
+        speciality: String
     ) {
         appRepository.doctorRegister(name, regNo, phoneNo, email, password, speciality)
     }

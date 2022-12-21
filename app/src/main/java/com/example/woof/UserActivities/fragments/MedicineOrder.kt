@@ -57,6 +57,7 @@ class MedicineOrder : Fragment() {
         val medicineDescription: String = requireArguments().getString("description")!!
         val medicinePrice: String = requireArguments().getString("price")!!
         val medicineRating: String = requireArguments().getString("rating")!!
+        val sellerID: String = requireArguments().getString("sellerId")!!
 
         medicineNameOrder = view.findViewById(R.id.medicineName_order)
         medicineImageOrder = view.findViewById(R.id.medicineImage_order)
@@ -74,7 +75,7 @@ class MedicineOrder : Fragment() {
         Glide.with(view.context).load(medicineImageUrl).into(medicineImageOrder)
 
         placeOrderBtn.setOnClickListener {
-            showDialog(Integer.parseInt(medicinePrice), medicineName)
+            showDialog(Integer.parseInt(medicinePrice), medicineName, medicineImageUrl, sellerID)
         }
         
         return view
@@ -91,7 +92,7 @@ class MedicineOrder : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    fun showDialog(price: Int, name: String) {
+    fun showDialog(price: Int, name: String, imageUrl: String, id: String) {
         val dialog = Dialog(requireContext())
         dialog.setCanceledOnTouchOutside(false)
 
@@ -150,7 +151,7 @@ class MedicineOrder : Fragment() {
                 address.error = "Enter your address before place order"
                 Toast.makeText(requireContext(), "Enter your address before place order", Toast.LENGTH_SHORT).show()
             }else{
-                dbViewModel!!.addOrder(userName, userPH, address.text.toString(),userUID, name, "$finalAmount", count)
+                dbViewModel!!.addOrder(id, userName, userPH, address.text.toString(),userUID, name, imageUrl, finalAmount.toString(), count)
                 dialog.hide()
                 Toast.makeText(requireContext(), "Order successfully placed", Toast.LENGTH_SHORT).show()
             }

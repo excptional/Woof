@@ -61,11 +61,13 @@ class DoctorActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home,
+                R.id.nav_home_doctor,
+                R.id.nav_bookings,
                 R.id.nav_feed,
                 R.id.nav_food_and_accessories,
                 R.id.nav_training_and_grooming,
                 R.id.nav_pet_shop_and_kennel,
+                R.id.nav_medicines,
                 R.id.nav_about_us,
                 R.id.nav_contact_us
             ), drawerLayout

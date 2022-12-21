@@ -19,6 +19,7 @@ import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.woof.PushNotification
 import com.example.woof.R
 import com.example.woof.repo.Response
 import com.example.woof.viewmodel.AppViewModel
@@ -59,6 +60,7 @@ class OrderPlace : Fragment() {
         val productImageUrl: String = requireArguments().getString("productImage")!!
         val productPrice: String = requireArguments().getString("productPrice")!!
         val productRating: String = requireArguments().getString("productRating")!!
+        val sellerID: String = requireArguments().getString("sellerId")!!
 
         productNameOrder = view.findViewById(R.id.productName_order)
         productImageOrder = view.findViewById(R.id.productImage_order)
@@ -74,7 +76,7 @@ class OrderPlace : Fragment() {
         Glide.with(view.context).load(productImageUrl).into(productImageOrder)
 
         placeOrderBtn.setOnClickListener {
-            showDialog(Integer.parseInt(productPrice), productName)
+            showDialog(Integer.parseInt(productPrice), productName, productImageUrl, sellerID)
         }
 
         return view
@@ -91,7 +93,7 @@ class OrderPlace : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    fun showDialog(price: Int, name: String) {
+    fun showDialog(price: Int, name: String, imageUrl: String, id: String) {
         val dialog = Dialog(requireContext())
         dialog.setCanceledOnTouchOutside(false)
 
@@ -150,12 +152,11 @@ class OrderPlace : Fragment() {
                 address.error = "Enter your address before place order"
                 Toast.makeText(requireContext(), "Enter your address before place order", Toast.LENGTH_SHORT).show()
             }else{
-                dbViewModel!!.addOrder(userName, userPH, address.text.toString(),userUID, name, "$finalAmount", count)
+                dbViewModel!!.addOrder(id, userName, userPH, address.text.toString(),userUID, name, imageUrl, finalAmount.toString(), count)
                 dialog.hide()
                 Toast.makeText(requireContext(), "Order successfully placed", Toast.LENGTH_SHORT).show()
             }
         }
-
         dialog.show()
     }
 

@@ -18,6 +18,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.app.NotificationCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
@@ -70,6 +71,9 @@ class BookDoctor : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var dateLayout: LinearLayout
     private lateinit var dateText: TextView
     private lateinit var myUser: FirebaseUser
+    private val CHANNEL_ID = "GFG"
+    val CHANNEL_NAME = "GFG ContentWriting"
+    val CHANNEL_DESCRIPTION = "GFG NOTIFICATION"
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -81,6 +85,7 @@ class BookDoctor : Fragment(), AdapterView.OnItemSelectedListener {
         val name = requireArguments().getString("name")
         val image = requireArguments().getString("image url")
         val speciality = requireArguments().getString("speciality")
+        val id = requireArguments().getString("id")
 
         appViewModel = ViewModelProvider(this)[AppViewModel::class.java]
         dbViewModel = ViewModelProvider(this)[DBViewModel::class.java]
@@ -101,6 +106,12 @@ class BookDoctor : Fragment(), AdapterView.OnItemSelectedListener {
         drSpeciality = view.findViewById(R.id.speciality_bookDoc)
         dateText = view.findViewById(R.id.dateText_bookDoc)
         dateLayout = view.findViewById(R.id.dateLayout_bookDoc)
+
+//        var builder = NotificationCompat.Builder(this, CHANNEL_ID)
+//            .setSmallIcon(R.drawable.bell)
+//            .setContentTitle("My notification")
+//            .setContentText("Notification send")
+//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         profileName.text = name
         Glide.with(view).load(image).into(profileImage)
@@ -143,40 +154,42 @@ class BookDoctor : Fragment(), AdapterView.OnItemSelectedListener {
         }
 
         bookDoctor.setOnClickListener {
-            if(selectedDate.isEmpty()) {
+            if (selectedDate.isEmpty()) {
                 Toast.makeText(
                     requireContext(),
                     "Select date first",
                     Toast.LENGTH_SHORT
                 ).show()
-            }else if (yourTimings.isEmpty()) {
+            } else if (yourTimings.isEmpty()) {
                 Toast.makeText(
                     requireContext(),
                     "Select timings first",
                     Toast.LENGTH_SHORT
                 ).show()
-            } else if (yourPetSpecies.isEmpty()){
+            } else if (yourPetSpecies.isEmpty()) {
                 Toast.makeText(
                     requireContext(),
                     "Select your pet species first",
                     Toast.LENGTH_SHORT
                 ).show()
-            } else if (writeIssue.text.isNullOrEmpty()){
+            } else if (writeIssue.text.isNullOrEmpty()) {
                 Toast.makeText(
                     requireContext(),
                     "Write something about your pet condition",
                     Toast.LENGTH_SHORT
                 ).show()
-            }
-            else {
-                dbViewModel!!.bookDoctor(userName, userImage, myUser.uid, selectedDate, yourTimings, yourPetSpecies, writeIssue.text.toString())
+            } else {
+                dbViewModel!!.bookDoctor(
+                    userName, userImage,
+                    myUser.uid, name!!, image!!, id!!,  selectedDate, yourTimings, speciality!!, yourPetSpecies, writeIssue.text.toString()
+                )
 
                 Toast.makeText(
                     requireContext(),
-                    "Booking successfully",
+                    "Appointment successfully",
                     Toast.LENGTH_SHORT
                 ).show()
-//                requireFragmentManager().popBackStack()
+                requireFragmentManager().popBackStack()
                 Navigation.findNavController(it).navigate(R.id.nav_hospitals_and_clinics)
             }
         }
@@ -227,19 +240,41 @@ class BookDoctor : Fragment(), AdapterView.OnItemSelectedListener {
     private fun showCalender() {
         val dialog = Dialog(requireContext())
         dialog.setCanceledOnTouchOutside(true)
-        dialog.setCancelable(false)
+        dialog.setCancelable(true)
 
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.dialog_calender)
 
         val calender: CalendarView = dialog.findViewById(R.id.calender)
 
+        calender.minDate = System.currentTimeMillis() - 1000
+
         calender.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            selectedDate = "$dayOfMonth-${month + 1}-$year"
-            dateText.text = selectedDate
+            selectedDate = "$dayOfMonth ${getMonth(month + 1)}, $year"
+            dateText.text = "$dayOfMonth-$month-$year"
             dialog.hide()
         }
         dialog.show()
+    }
+
+    private fun getMonth(m: Int): String {
+        return when (m) {
+            1 -> "Jan"
+            2 -> "Feb"
+            3 -> "Mar"
+            4 -> "Apr"
+            5 -> "May"
+            6 -> "Jun"
+            7 -> "Jul"
+            8 -> "Aug"
+            9 -> "Sep"
+            10 -> "Oct"
+            11 -> "Nov"
+            12 -> "Dec"
+            else -> {
+                ""
+            }
+        }
     }
 
 }

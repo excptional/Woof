@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,7 +36,7 @@ class Hospitalities : Fragment() {
     private var dbViewModel: DBViewModel? = null
     private var appViewModel: AppViewModel? = null
     private lateinit var progressbarHospital: LottieAnimationView
-    private lateinit var mainlayouthospital: LinearLayout
+    private lateinit var mainlayouthospital: RelativeLayout
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -157,7 +158,8 @@ class Hospitalities : Fragment() {
             val doctor = DoctorItems(
                 i.getString("Name"),
                 i.getString("Image Url"),
-                i.getString("Speciality")
+                i.getString("Speciality"),
+                i.getString("ID")
             )
             doctorItemsArray.add(doctor)
         }

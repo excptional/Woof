@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_seller"
+    app:startDestination="@+id/nav_home_seller">
+
+    <fragment
+        android:id="@+id/nav_home_seller"
+        android:name="com.example.woof.UserActivities.fragments.HomeSeller"
+        tools:layout="@layout/fragment_home_seller" />
+
+    <fragment
+        android:id="@+id/nav_orders"
+        android:name="com.example.woof.UserActivities.fragments.Orders"
+        tools:layout="@layout/fragment_orders" />
+
+    <fragment
+        android:id="@+id/nav_feed"
+        android:name="com.example.woof.UserActivities.fragments.Feed"
+        tools:layout="@layout/fragment_feed" />
+
+    <fragment
+        android:id="@+id/nav_food_and_accessories"
+        android:name="com.example.woof.UserActivities.fragments.Accessories"
+        tools:layout="@layout/fragment_accessories" />
+
+
+    <fragment
+        android:id="@+id/nav_about_us"
+        android:name="com.example.woof.UserActivities.fragments.AboutUs"
+        tools:layout="@layout/fragment_about_us" />
+
+    <fragment
+        android:id="@+id/nav_contact_us"
+        android:name="com.example.woof.UserActivities.fragments.ContactUs"
+        tools:layout="@layout/fragment_contact_us" />
+
+    <fragment
+        android:id="@+id/nav_feed_content_show"
+        android:name="com.example.woof.UserActivities.fragments.FeedContentShow"
+        tools:layout="@layout/fragment_feed_content_show" />
+
+    <fragment
+        android:id="@+id/nav_order_place"
+        android:name="com.example.woof.UserActivities.fragments.OrderPlace"
+        tools:layout="@layout/fragment_order_place" />
+
+    <fragment
+        android:id="@+id/nav_addAccMed"
+        android:name="com.example.woof.UserActivities.fragments.AddAccMed"
+        tools:layout="@layout/fragment_add_acc_med" />
+
+    <fragment
+        android:id="@+id/nav_addOrg"
+        android:name="com.example.woof.UserActivities.fragments.AddOrg"
+        tools:layout="@layout/fragment_add_org" />
+
+
+</navigation>

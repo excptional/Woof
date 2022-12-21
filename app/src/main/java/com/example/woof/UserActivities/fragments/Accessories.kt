@@ -100,7 +100,8 @@ class Accessories : Fragment() {
                 i.getString("Product Name"),
                 i.getString("Product Image"),
                 i.getString("Product Price"),
-                i.getString("Product Rating")
+                i.getString("Product Rating"),
+                i.getString("Seller ID")
             )
             accItemsArray.add(acc)
         }

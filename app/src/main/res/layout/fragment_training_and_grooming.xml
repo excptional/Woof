@@ -11,113 +11,122 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView_trainingAndGroomingCent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-            android:queryBackground="@null"
-            android:queryHint="Search"
-            android:background="@drawable/rounded_corner_gray"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_alignParentTop="true"/>
-
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/mainContent_trainingAndGrooming"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/mainLayout_trainingAndGroomingLayout"
-            android:layout_below="@id/searchView_trainingAndGroomingCent"
-            android:orientation="vertical">
+            android:visibility="gone">
 
-            <androidx.cardview.widget.CardView
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView_trainingAndGroomingCent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                app:cardBackgroundColor="@color/material_black"
-                app:cardCornerRadius="@dimen/_10sdp">
+                android:iconifiedByDefault="false"
+                android:queryBackground="@null"
+                android:queryHint="Search"
+                android:background="@drawable/rounded_corner_gray"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_alignParentTop="true"/>
 
-                <ImageView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/mainLayout_trainingAndGroomingLayout"
+                android:layout_below="@id/searchView_trainingAndGroomingCent"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_130sdp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/training2"/>
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:cardBackgroundColor="@color/material_black"
+                    app:cardCornerRadius="@dimen/_10sdp">
 
-            </androidx.cardview.widget.CardView>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_130sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/training2"/>
 
-        </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_50sdp"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/mainLayout_trainingAndGroomingLayout"
-            android:orientation="vertical">
+            </LinearLayout>
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="@dimen/_270sdp"
-                android:layout_height="@dimen/_120sdp"
-                android:layout_gravity="center_horizontal"
-                android:scaleX="2"
-                android:scaleY="2"
-                android:visibility="gone"
-                app:lottie_autoPlay="true"
-                app:lottie_rawRes="@raw/hospital" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:text="Training centers"
-                android:textColor="@color/material_black"
-                android:layout_gravity="start"
-                android:textStyle="bold" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_trainingCent"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/training_center_item" />
+                android:layout_marginBottom="@dimen/_50sdp"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/mainLayout_trainingAndGroomingLayout"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:text="Grooming centers"
-                android:textColor="@color/material_black"
-                android:layout_gravity="start"
-                android:textStyle="bold" />
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="@dimen/_270sdp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleX="2"
+                    android:scaleY="2"
+                    android:visibility="gone"
+                    app:lottie_autoPlay="true"
+                    app:lottie_rawRes="@raw/hospital" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_groomingCent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/grooming_center_item" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="Training centers"
+                    android:textColor="@color/material_black"
+                    android:layout_gravity="start"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_trainingCent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/training_center_item" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="Grooming centers"
+                    android:textColor="@color/material_black"
+                    android:layout_gravity="start"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_groomingCent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/grooming_center_item" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progressbar_trainingAndGroomingCent"
+            android:layout_centerInParent="true"
             android:layout_width="@dimen/_200sdp"
             android:layout_height="@dimen/_100sdp"
-            android:layout_centerInParent="true"
             android:scaleX="2"
             android:scaleY="2"
-            android:visibility="gone"
+            android:visibility="visible"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/loaderorange" />

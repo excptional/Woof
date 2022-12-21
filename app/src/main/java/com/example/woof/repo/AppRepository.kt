@@ -121,26 +121,28 @@ class AppRepository(private val application: Application) {
     }
 
     fun doctorRegister(
-        name: String?,
-        regNo: String?,
-        phoneNo: String?,
-        email: String?,
-        password: String?,
-        speciality: String?
+        name: String,
+        regNo: String,
+        phoneNo: String,
+        email: String,
+        password: String,
+        speciality: String
     ) {
-        val data = hashMapOf(
-            "Name" to name,
-            "Registration No" to regNo,
-            "Phone No" to phoneNo,
-            "Image Url" to "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/user2.png?alt=media&token=6eb92a4c-a6e6-443b-9ca3-8e7d5a7cd7ef",
-            "Email" to email,
-            "Usertype" to "Doctor",
-            "Speciality" to speciality
-        )
-        firebaseAuth.createUserWithEmailAndPassword(email!!, password!!)
+
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(
             ) { task ->
                 if (task.isSuccessful) {
+                    val data = hashMapOf(
+                        "ID" to firebaseAuth.currentUser!!.uid,
+                        "Name" to name,
+                        "Registration No" to regNo,
+                        "Phone No" to phoneNo,
+                        "Image Url" to "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/user2.png?alt=media&token=6eb92a4c-a6e6-443b-9ca3-8e7d5a7cd7ef",
+                        "Email" to email,
+                        "Usertype" to "Doctor",
+                        "Speciality" to speciality
+                    )
                     userLiveData.postValue(firebaseAuth.currentUser)
                     responseLiveData.postValue(Response.Success())
                     firebaseDB.collection("User").document(firebaseAuth.currentUser!!.uid).set(data)

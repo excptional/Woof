@@ -31,6 +31,7 @@ class DoctorAdapter(
         bundle.putString("name", currentItem.doctorName)
         bundle.putString("speciality", currentItem.doctorSpeciality)
         bundle.putString("image url", currentItem.doctorImage)
+        bundle.putString("id", currentItem.doctorID)
 
         holder.itemLayoutDoctor.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.nav_book_doctor, bundle)

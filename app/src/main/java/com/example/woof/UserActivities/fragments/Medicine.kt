@@ -117,7 +117,6 @@ class Medicine : Fragment() {
                 }
             }
         }
-        
         return view
     }
 
@@ -129,7 +128,8 @@ class Medicine : Fragment() {
                 i.getString("Image Url"),
                 i.getString("Description"),
                 i.getString("Price"),
-                i.getString("Ratings")
+                i.getString("Ratings"),
+                i.getString("Seller ID")
             )
             medicineItemsArray.add(medicine)
         }
@@ -138,5 +138,4 @@ class Medicine : Fragment() {
         shimmerContainerMedicine.visibility = View.GONE
         medicineRecyclerView.visibility = View.VISIBLE
     }
-
 }

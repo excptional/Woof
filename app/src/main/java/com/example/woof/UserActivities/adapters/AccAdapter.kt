@@ -43,6 +43,7 @@ RecyclerView.Adapter<AccAdapter.AccViewHolder>() {
         bundle.putString("productImage", currentItem.productImageUrl)
         bundle.putString("productPrice", currentItem.productPrice)
         bundle.putString("productRating", currentItem.productRating)
+        bundle.putString("sellerId", currentItem.sellerID)
 
         holder.itemLayoutAcc.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.nav_order_place, bundle)

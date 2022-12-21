@@ -39,9 +39,10 @@ class DBViewModel(application: Application) :
         get() = dbRepository.bookingsData
     val doctorData: LiveData<MutableList<DocumentSnapshot>>
         get() = dbRepository.doctorData
+    val orderData: LiveData<MutableList<DocumentSnapshot>>
+        get() = dbRepository.orderData
     val feedbackData: LiveData<String?>
         get() = dbRepository.feedbackData
-
 
 
     fun uploadImageToStorage(imageUri: Uri, user: FirebaseUser) {
@@ -79,7 +80,7 @@ class DBViewModel(application: Application) :
         dbRepository.fetchPost()
     }
 
-    fun giveLikes(user: FirebaseUser, id:  String?){
+    fun giveLikes(user: FirebaseUser, id: String?) {
         dbRepository.giveLikes(user, id)
     }
 
@@ -111,7 +112,7 @@ class DBViewModel(application: Application) :
         dbRepository.fetchMedicine()
     }
 
-    fun uploadTradeLicDoc(img: Uri){
+    fun uploadTradeLicDoc(img: Uri) {
         dbRepository.uploadTradeLicDoc(img)
     }
 
@@ -123,37 +124,85 @@ class DBViewModel(application: Application) :
         dbRepository.getDoctorData()
     }
 
-    fun addGroomingCenter(count: Int){
-        dbRepository.addGroomingCenter(count)
+    fun addGroomingCenter(name: String, number: String, address: String, city: String, website: String?) {
+        dbRepository.addGroomingCenter(name, number, address, city, website)
     }
 
-    fun addMedicines(count: Int) {
-        dbRepository.addMedicines(count)
+    fun addMedicines(uid: String, productName: String, productImage: Uri, productPrice: String, description: String) {
+        dbRepository.addMedicines(uid, productName, productImage, productPrice, description)
     }
 
-    fun addTrainingCenter(count: Int){
-        dbRepository.addTrainingCenter(count)
+    fun addTrainingCenter(name: String, number: String, address: String, city: String, website: String?) {
+        dbRepository.addTrainingCenter(name, number, address, city, website)
     }
 
-    fun addKennels(count: Int){
-        dbRepository.addKennelsCenter(count)
+    fun addKennels(name: String, number: String, address: String, city: String, website: String?) {
+        dbRepository.addKennels(name, number, address, city, website)
     }
 
-    fun addAccessories(count: Int){
-        dbRepository.addAccessories(count)
+    fun addPetShops(name: String, number: String, address: String, city: String, website: String?) {
+        dbRepository.addPetShops(name, number, address, city, website)
     }
 
-    fun sendFeedback(email: String, subject: String, massage: String){
+    fun addAccessories(uid: String, productName: String, productImage: Uri, productPrice: String) {
+        dbRepository.addAccessories(uid, productName, productImage, productPrice)
+    }
+
+    fun fetchOrders() {
+        dbRepository.fetchOrder()
+    }
+
+    fun sendFeedback(email: String, subject: String, massage: String) {
         dbRepository.sendFeedback(email, subject, massage)
     }
 
-    fun addOrder(userName: String, userNumber: String, userAddress: String,
-                 userUID: String, productName: String, payableAmount: String, quantity: Int){
-        dbRepository.addOrder(userName, userNumber, userAddress, userUID, productName, payableAmount, quantity)
+    fun addOrder(
+        sellerID: String, userName: String, userNumber: String, userAddress: String,
+        userUID: String, productName: String, productImageUrl: String, payableAmount: String, quantity: Int
+    ) {
+        dbRepository.addOrder(
+            sellerID,
+            userName,
+            userNumber,
+            userAddress,
+            userUID,
+            productName,
+            productImageUrl,
+            payableAmount,
+            quantity
+        )
     }
 
-    fun bookDoctor(name: String, imageUrl: String, uid: String, date: String, timings: String, species: String, issue: String) {
-        dbRepository.bookDoctor(name, imageUrl, uid, date, timings, species, issue)
+    fun bookDoctor(
+        userName: String,
+        userImageUrl: String,
+        userUid: String,
+        docName: String,
+        docImageUrl: String,
+        docUid: String,
+        date: String,
+        time: String,
+        docSpeciality: String,
+        species: String,
+        issue: String
+    ) {
+        dbRepository.bookDoctor(
+            userName,
+            userImageUrl,
+            userUid,
+            docName,
+            docImageUrl,
+            docUid,
+            date,
+            time,
+            docSpeciality,
+            species,
+            issue
+        )
+    }
+
+    fun updateStatus(id: String, status: String) {
+        dbRepository.updateStatus(id, status)
     }
 
 }

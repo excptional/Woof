@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_constraintBottom_toBottomOf="parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UserActivities.fragments.BookDoctor">
 
@@ -22,7 +23,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/topImageLayout"
         android:padding="@dimen/_10sdp"
         android:orientation="vertical">
@@ -72,6 +73,35 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                android:background="@drawable/rounded_corner_gray"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundMode="none"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/writeIssues_bookDoc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Write your issues"
+                        android:inputType="textMultiLine"
+                        android:maxLength="150"
+                        android:padding="@dimen/_5sdp"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/material_black"
+                        tools:ignore="TouchTargetSizeCheck"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/dateLayout_bookDoc"
@@ -140,35 +170,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/_5sdp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_80sdp"
-                android:background="@drawable/rounded_corner_gray"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:boxBackgroundMode="none"
-                    app:hintEnabled="false">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/writeIssues_bookDoc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Write your issues"
-                        android:inputType="textMultiLine"
-                        android:maxLength="150"
-                        android:padding="@dimen/_5sdp"
-                        android:scrollbars="vertical"
-                        android:textColor="@color/material_black"
-                        tools:ignore="TouchTargetSizeCheck"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
