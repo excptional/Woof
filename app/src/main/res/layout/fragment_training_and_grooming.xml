@@ -40,15 +40,22 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_8sdp"
                     app:cardBackgroundColor="@color/material_black"
                     app:cardCornerRadius="@dimen/_10sdp">
 
-                    <ImageView
+                    <com.denzcoskun.imageslider.ImageSlider
+                        android:id="@+id/t_and_g_slider"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_130sdp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/training2"/>
+                        android:layout_height="@dimen/_170sdp"
+                        android:background="@drawable/uploadimage"
+                        app:iss_auto_cycle="true"
+                        app:iss_delay="0"
+                        app:iss_error_image="@drawable/error"
+                        app:iss_period="1000"
+                        app:iss_placeholder="@drawable/placeholder"
+                        app:iss_selected_dot="@drawable/default_selected_dot"
+                        app:iss_unselected_dot="@drawable/default_unselected_dot" />
 
                 </androidx.cardview.widget.CardView>
 

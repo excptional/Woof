@@ -251,7 +251,7 @@ class BookDoctor : Fragment(), AdapterView.OnItemSelectedListener {
 
         calender.setOnDateChangeListener { view, year, month, dayOfMonth ->
             selectedDate = "$dayOfMonth ${getMonth(month + 1)}, $year"
-            dateText.text = "$dayOfMonth-$month-$year"
+            dateText.text = selectedDate
             dialog.hide()
         }
         dialog.show()

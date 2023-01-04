@@ -127,7 +127,6 @@ class SignUpSeller : Fragment() {
                         docUrl = it!!
                         signUpProgressbarSeller.visibility = View.GONE
                     }
-
                     Toast.makeText(requireContext(), "Upload document image successfully", Toast.LENGTH_SHORT).show()
                 }
                 is Response.Failure -> {
@@ -188,6 +187,7 @@ class SignUpSeller : Fragment() {
                         signUpProgressbarSeller.visibility = View.GONE
                         signUpWhiteLayoutSeller.visibility = View.GONE
                         requireActivity().startActivity(Intent(activity, SplashScreen::class.java))
+                        this.onDestroy()
                     }
                     is Response.Failure -> {
                         Toast.makeText(

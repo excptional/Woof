@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/refreshLayout_reminder"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UserActivities.fragments.Reminder">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/noAlarmSet_reminder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No alarm was set"
+            android:textSize="@dimen/_11sdp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            tools:ignore="HardcodedText" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_reminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/reminder_items"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_reminder"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/plus"
+            android:scaleType="centerInside"
+            android:layout_margin="@dimen/_20sdp"/>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_reminder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            app:shimmer_duration="800">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/reminder_shimmer" />
+                <include layout="@layout/reminder_shimmer" />
+                <include layout="@layout/reminder_shimmer" />
+                <include layout="@layout/reminder_shimmer" />
+                <include layout="@layout/reminder_shimmer" />
+                <include layout="@layout/reminder_shimmer" />
+                <include layout="@layout/reminder_shimmer" />
+                <include layout="@layout/reminder_shimmer" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </RelativeLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

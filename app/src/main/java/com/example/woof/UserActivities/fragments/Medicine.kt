@@ -90,9 +90,9 @@ class Medicine : Fragment() {
 
 
         swipeRefreshLayout.setOnRefreshListener {
-            shimmerContainerMedicine.startShimmer()
             shimmerContainerMedicine.visibility = View.VISIBLE
             medicineRecyclerView.visibility = View.GONE
+            shimmerContainerMedicine.startShimmer()
             dbViewModel!!.fetchMedicine()
             dbViewModel!!.medicineData.observe(viewLifecycleOwner) {
                 fetchMedicines(it)

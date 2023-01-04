@@ -14,6 +14,7 @@ import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Suppress("NAME_SHADOWING")
 class DBRepository(private val application: Application) {
 
     private val firebaseStorage = FirebaseStorage.getInstance()
@@ -70,6 +71,10 @@ class DBRepository(private val application: Application) {
     private val orderLivedata = MutableLiveData<MutableList<DocumentSnapshot>>()
     val orderData: LiveData<MutableList<DocumentSnapshot>>
         get() = orderLivedata
+
+    private val reminderLivedata = MutableLiveData<MutableList<DocumentSnapshot>>()
+    val reminderData: LiveData<MutableList<DocumentSnapshot>>
+        get() = reminderLivedata
 
     private val tradeLicUrlLivedata = MutableLiveData<String?>()
     val tradeLicUrl: LiveData<String?>
@@ -649,6 +654,30 @@ class DBRepository(private val application: Application) {
             }
             .addOnFailureListener {
                 responseDBLivedata.postValue(Response.Failure(getErrorMassage(it)))
+            }
+    }
+
+    fun setReminder(type: String, time: String, timeMillis: Long, date: String?, massage: String, uid: String, rID: Long) {
+        val date1 = SimpleDateFormat("yyyy_MM_dd_hh:mm:ss", Locale.getDefault()).format(Date())
+        val data = mapOf(
+            "type" to type,
+            "time" to time,
+            "time in millis" to timeMillis,
+            "date" to date,
+            "massage" to massage,
+            "reminder ID" to rID
+        )
+        firebaseDB.collection("Reminder").document("Reminder").collection(uid).document(date1).set(data)
+    }
+
+    fun fetchReminder(uid: String) {
+        firebaseDB.collection("Reminder").document("Reminder").collection(uid).get()
+            .addOnSuccessListener { documents ->
+                val list = mutableListOf<DocumentSnapshot>()
+                for (document in documents) {
+                    list.add(document)
+                }
+                reminderLivedata.postValue(list)
             }
     }
 

@@ -46,17 +46,14 @@ class Shop : Fragment() {
         
         val view = inflater.inflate(R.layout.fragment_shop, container, false)
 
-//        val imageList = ArrayList<SlideModel>() // Create image list
+        val imageList = ArrayList<SlideModel>()
 
-// imageList.add(SlideModel("String Url" or R.drawable)
-// imageList.add(SlideModel("String Url" or R.drawable, "title") You can add title
+        imageList.add(SlideModel("https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/Sliders%2FKennel1.jpg?alt=media&token=fd1cac63-65bc-4bf6-9453-2c10be8777e0", ScaleTypes.FIT))
+        imageList.add(SlideModel("https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/Sliders%2Fpetshop1.png?alt=media&token=8e2fac68-61b8-4a44-9d0c-fdc2454c1bad", ScaleTypes.FIT))
+        imageList.add(SlideModel("https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/Sliders%2Fpetshop2.png?alt=media&token=4aeb0f5d-ebdb-42a0-9ae6-80f166885a19", ScaleTypes.FIT))
 
-//        imageList.add(SlideModel("https://bit.ly/2YoJ77H", "The animal population decreased by 58 percent in 42 years.", ScaleTypes.FIT))
-//        imageList.add(SlideModel("https://bit.ly/2BteuF2", "Elephants and tigers may become extinct.", ScaleTypes.FIT))
-//        imageList.add(SlideModel("https://bit.ly/3fLJf72", "And people do that.", ScaleTypes.FIT))
-//
-//        val imageSlider = view.findViewById<ImageSlider>(R.id.image_slider)
-//        imageSlider.setImageList(imageList, ScaleTypes.FIT)
+        val imageSlider = view.findViewById<ImageSlider>(R.id.shop_slider)
+        imageSlider.setImageList(imageList, ScaleTypes.FIT)
 
         appViewModel = ViewModelProvider(this)[AppViewModel::class.java]
         dbViewModel = ViewModelProvider(this)[DBViewModel::class.java]

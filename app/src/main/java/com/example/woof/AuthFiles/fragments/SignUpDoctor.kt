@@ -218,6 +218,7 @@ class SignUpDoctor : Fragment(), AdapterView.OnItemSelectedListener {
                         signUpProgressbarDoctor.visibility = View.GONE
                         signUpWhiteLayoutDoctor.visibility = View.GONE
                         requireActivity().startActivity(Intent(activity, SplashScreen::class.java))
+                        this.onDestroy()
                     }
                     is Response.Failure -> {
                         Toast.makeText(

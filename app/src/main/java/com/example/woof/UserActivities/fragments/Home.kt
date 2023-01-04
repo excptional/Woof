@@ -41,6 +41,9 @@ class Home : Fragment() {
     private lateinit var petSopKennelBtn: CardView
     private lateinit var hospitalClinicBtn: CardView
     private lateinit var medicineBtn: CardView
+    private lateinit var reminderBtn: CardView
+    private lateinit var aboutBtn: CardView
+    private lateinit var contactsBtn: CardView
     private var appViewModel: AppViewModel? = null
     private var dbViewModel: DBViewModel? = null
     private lateinit var myAppointmentRecyclerView: RecyclerView
@@ -107,6 +110,9 @@ class Home : Fragment() {
         petSopKennelBtn = view.findViewById(R.id.petShopKennelBtn)
         hospitalClinicBtn = view.findViewById(R.id.hospitalClinicBtn)
         medicineBtn = view.findViewById(R.id.medicinesBtn)
+        reminderBtn = view.findViewById(R.id.reminderBtn)
+        aboutBtn = view.findViewById(R.id.aboutBtn)
+        contactsBtn = view.findViewById(R.id.contactsBtn)
 
         val imageList = ArrayList<SlideModel>() // Create image list
 
@@ -115,19 +121,37 @@ class Home : Fragment() {
 
         imageList.add(
             SlideModel(
-                "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/Sliders%2F1.jpg?alt=media&token=4de88a3d-fd40-43b8-9efa-67a290b2f27f",
+                "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/Sliders%2Fhome1.png?alt=media&token=5401288e-3919-4055-9011-f14ff9cefa10",
                 ScaleTypes.FIT
             )
         )
         imageList.add(
             SlideModel(
-                "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/Sliders%2F2.jpg?alt=media&token=352b62cb-de51-4a59-91a6-f46b9e6db8ed",
+                "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/Sliders%2FHome2.png?alt=media&token=19823fe9-22aa-4727-b4a4-a98cbd5dd903",
+                ScaleTypes.FIT
+            )
+        )
+        imageList.add(
+            SlideModel(
+                "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/Sliders%2FHome3.png?alt=media&token=1e8578d5-aa58-43b1-89d1-6a2b4a7c2e9a",
                 ScaleTypes.FIT
             )
         )
 
-        val imageSlider = view.findViewById<ImageSlider>(R.id.image_slider)
+        val imageSlider = view.findViewById<ImageSlider>(R.id.home_slider)
         imageSlider.setImageList(imageList, ScaleTypes.FIT)
+
+        reminderBtn.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.nav_reminder)
+        }
+
+        aboutBtn.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.nav_about_us)
+        }
+
+        contactsBtn.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.nav_contact_us)
+        }
 
         feedBtn.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.nav_feed)
@@ -193,7 +217,7 @@ class Home : Fragment() {
         return view
     }
 
-   private fun fetchAppointments(list: MutableList<DocumentSnapshot>) {
+    private fun fetchAppointments(list: MutableList<DocumentSnapshot>) {
         mAItemsArray = arrayListOf()
         for (i in list) {
             if (i.getString("User Uid") == myUser.uid) {

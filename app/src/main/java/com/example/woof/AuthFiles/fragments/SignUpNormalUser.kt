@@ -328,6 +328,7 @@ class SignUpNormalUser : Fragment(), AdapterView.OnItemSelectedListener {
                         signUpProgressbarUser.visibility = View.GONE
                         signUpWhiteLayoutUser.visibility = View.GONE
                         requireActivity().startActivity(Intent(activity, SplashScreen::class.java))
+                        this.onDestroy()
                     }
                     is Response.Failure -> {
                         Toast.makeText(

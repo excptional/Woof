@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.airbnb.lottie.LottieAnimationView
+import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.example.woof.R
 import com.example.woof.UserActivities.adapters.GroomingCentAdapter
 import com.example.woof.UserActivities.adapters.TrainingCentAdapter
@@ -52,6 +55,36 @@ class TrainingAndGrooming : Fragment() {
         contentLayoutTrainingAndGrooming = view.findViewById(R.id.mainContent_trainingAndGrooming)
         progressbarTrainingAndGroomingCent.visibility = View.VISIBLE
         contentLayoutTrainingAndGrooming.visibility = View.GONE
+
+        val imageList = ArrayList<SlideModel>()
+
+        imageList.add(
+            SlideModel(
+                "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/Sliders%2FTraining2.jpg?alt=media&token=e4eb443f-9039-49a1-ab61-ee0c2da28c07",
+                ScaleTypes.CENTER_CROP
+            )
+        )
+        imageList.add(
+            SlideModel(
+                "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/Sliders%2FTraining1.png?alt=media&token=94c0df9a-9294-499e-9ef8-7cce060be970",
+                ScaleTypes.FIT
+            )
+        )
+        imageList.add(
+            SlideModel(
+                "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/Sliders%2Fgroom1.png?alt=media&token=de3d55cf-d9fb-4743-a032-11a5a2ea676d",
+                ScaleTypes.FIT
+            )
+        )
+        imageList.add(
+            SlideModel(
+                "https://firebasestorage.googleapis.com/v0/b/woof-uit.appspot.com/o/Sliders%2Fgroom2.png?alt=media&token=0b5fdc77-10d2-42b6-9b9e-0227d1e1bf61",
+                ScaleTypes.FIT
+            )
+        )
+
+        val imageSlider = view.findViewById<ImageSlider>(R.id.t_and_g_slider)
+        imageSlider.setImageList(imageList, ScaleTypes.FIT)
 
         trainingCentAdapter = TrainingCentAdapter(trainingCentItemsArray)
         recyclerViewTrainingCent.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)

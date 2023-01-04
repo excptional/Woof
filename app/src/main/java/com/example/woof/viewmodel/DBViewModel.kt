@@ -4,7 +4,6 @@ import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.woof.repo.DBRepository
 import com.example.woof.repo.Response
 import com.google.firebase.auth.FirebaseUser
@@ -43,6 +42,8 @@ class DBViewModel(application: Application) :
         get() = dbRepository.orderData
     val feedbackData: LiveData<String?>
         get() = dbRepository.feedbackData
+    val reminderData: LiveData<MutableList<DocumentSnapshot>>
+        get() = dbRepository.reminderData
 
 
     fun uploadImageToStorage(imageUri: Uri, user: FirebaseUser) {
@@ -203,6 +204,13 @@ class DBViewModel(application: Application) :
 
     fun updateStatus(id: String, status: String) {
         dbRepository.updateStatus(id, status)
+    }
+
+    fun setReminder(type: String, time: String, timeMillis: Long, date: String?, massage: String, uid: String, rID: Long) {
+        dbRepository.setReminder(type, time, timeMillis, date, massage, uid, rID)
+    }
+    fun fetchReminder(uid: String) {
+        dbRepository.fetchReminder(uid)
     }
 
 }
