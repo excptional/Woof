@@ -69,7 +69,8 @@ class DoctorActivity : AppCompatActivity() {
                 R.id.nav_pet_shop_and_kennel,
                 R.id.nav_medicines,
                 R.id.nav_about_us,
-                R.id.nav_contact_us
+                R.id.nav_contact_us,
+                R.id.nav_future_scope
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

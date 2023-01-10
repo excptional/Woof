@@ -25,7 +25,6 @@
         android:name="com.example.woof.UserActivities.fragments.Accessories"
         tools:layout="@layout/fragment_accessories" />
 
-
     <fragment
         android:id="@+id/nav_about_us"
         android:name="com.example.woof.UserActivities.fragments.AboutUs"
@@ -55,6 +54,11 @@
         android:id="@+id/nav_addOrg"
         android:name="com.example.woof.UserActivities.fragments.AddOrg"
         tools:layout="@layout/fragment_add_org" />
+
+    <fragment
+        android:id="@+id/nav_future_scope"
+        android:name="com.example.woof.UserActivities.fragments.FutureScope"
+        tools:layout="@layout/fragment_future_scope" />
 
 
 </navigation>

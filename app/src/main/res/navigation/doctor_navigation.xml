@@ -70,4 +70,9 @@
         android:name="com.example.woof.UserActivities.fragments.MedicineOrder"
         tools:layout="@layout/fragment_medicine_order" />
 
+    <fragment
+        android:id="@+id/nav_future_scope"
+        android:name="com.example.woof.UserActivities.fragments.FutureScope"
+        tools:layout="@layout/fragment_future_scope" />
+
 </navigation>

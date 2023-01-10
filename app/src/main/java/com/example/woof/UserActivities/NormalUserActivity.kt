@@ -67,7 +67,8 @@ class NormalUserActivity : AppCompatActivity() {
                 R.id.nav_hospitals_and_clinics,
                 R.id.nav_medicines,
                 R.id.nav_about_us,
-                R.id.nav_contact_us
+                R.id.nav_contact_us,
+                R.id.nav_future_scope
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

@@ -85,4 +85,9 @@
         android:name="com.example.woof.UserActivities.fragments.SetReminder"
         tools:layout="@layout/fragment_set_reminder" />
 
+    <fragment
+        android:id="@+id/nav_future_scope"
+        android:name="com.example.woof.UserActivities.fragments.FutureScope"
+        tools:layout="@layout/fragment_future_scope" />
+
 </navigation>

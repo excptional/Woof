@@ -65,7 +65,8 @@ class SellerActivity : AppCompatActivity() {
                 R.id.nav_feed,
                 R.id.nav_food_and_accessories,
                 R.id.nav_about_us,
-                R.id.nav_contact_us
+                R.id.nav_contact_us,
+                R.id.nav_future_scope
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
